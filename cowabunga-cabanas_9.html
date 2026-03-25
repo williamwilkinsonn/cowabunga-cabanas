@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Cowabunga Bay – Cabana Check-In</title>
 <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* ═══════════════════════ THEME VARS ═══════════════════════ */
 :root{
@@ -46,6 +47,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 .sess-btn.active{background:var(--sand);color:var(--dark);border-color:var(--sand);}
 .countdown-chip{background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px;font-size:.62rem;font-weight:800;color:rgba(255,255,255,.8);white-space:nowrap;display:flex;align-items:center;gap:3px;}
 .countdown-chip.urgent{background:rgba(239,71,111,.35);color:#fecdd3;}
+.sync-chip{background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px;font-size:.62rem;font-weight:800;color:rgba(255,255,255,.7);white-space:nowrap;display:flex;align-items:center;gap:3px;flex-shrink:0;transition:background .3s,color .3s;}
 
 /* Weather */
 .weather-chip{background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px;font-size:.7rem;font-weight:800;color:white;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:3px;flex-shrink:0;}
@@ -485,6 +487,8 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
   <div class="weather-chip" id="weather-chip" onclick="fetchWeather()" title="Click to refresh">🌤 —</div>
 
+  <div class="sync-chip" id="sync-chip" title="Supabase real-time sync status">⏳ Connecting…</div>
+
   <div class="topbar-right">
     <div class="view-tabs">
       <button class="view-tab active" id="tab-manager" onclick="switchView('manager')">📋 Mgr</button>
@@ -780,14 +784,171 @@ function stateKey(date,sess){return `cb_${date||currentDate}_${sess||currentSess
 function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lss(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 function loadSession(date,sess){try{const r=ls(stateKey(date,sess));return r?JSON.parse(r):{};}catch(e){return{};}}
-function saveSession(data,date,sess){lss(stateKey(date,sess),JSON.stringify(data));}
+function saveSession(data,date,sess){lss(stateKey(date,sess),JSON.stringify(data));sbSyncSession(data,date,sess);}
+function saveSessionLocal(data,date,sess){lss(stateKey(date,sess),JSON.stringify(data));}
 function loadServers(){try{const r=ls('cb_servers_v2');return r?JSON.parse(r):[{name:'Alex',color:'#e63946'},{name:'Jordan',color:'#3a86ff'},{name:'Taylor',color:'#2a9d8f'},{name:'Morgan',color:'#7209b7'}];}catch(e){return[];}}
-function saveServers(){lss('cb_servers_v2',JSON.stringify(servers));}
+function saveServers(){lss('cb_servers_v2',JSON.stringify(servers));sbSyncServers();}
 function loadPrices(){try{const r=ls('cb_prices');return r?JSON.parse(r):{};}catch(e){return{};}}
-function savePrices(){lss('cb_prices',JSON.stringify(prices));}
+function savePrices(){lss('cb_prices',JSON.stringify(prices));sbSyncPrices();}
 function loadCustomLabels(){try{const r=ls('cb_labels');return r?JSON.parse(r):{};}catch(e){return{};}}
 function saveCustomLabels(){lss('cb_labels',JSON.stringify(customLabels));}
 
+// ═══════════════════════════════════════
+// SUPABASE REAL-TIME SYNC
+// ═══════════════════════════════════════
+const SB_URL='https://vxbzslecnpxoevdthtyb.supabase.co';
+const SB_KEY='sb_publishable_rtm9ovX3xo9emn2di0wPFQ_pg4I6hzI';
+let sb=null,sbOnline=navigator.onLine,sbQueue=[];
+
+function setSyncChip(status){
+  const chip=document.getElementById('sync-chip');
+  if(!chip) return;
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  if(status==='online'){chip.textContent=`🟢 Live · ${t}`;chip.style.cssText='background:rgba(6,214,160,.18);color:#06d6a0;';}
+  else if(status==='syncing'){chip.textContent='🔄 Syncing…';chip.style.cssText='background:rgba(255,209,102,.18);color:#ffd166;';}
+  else if(status==='offline'){chip.textContent='🔴 Offline';chip.style.cssText='background:rgba(239,71,111,.18);color:#ef476f;';}
+  else{chip.textContent='⏳ Connecting…';chip.style.cssText='';}
+}
+
+// Deduplicated enqueue: keeps only the latest entry per type/key to avoid redundant syncs
+function sbEnqueue(item){
+  if(item.t==='session'){
+    const key=`${item.d.date}|${item.d.sess}`;
+    sbQueue=sbQueue.filter(q=>!(q.t==='session'&&`${q.d.date}|${q.d.sess}`===key));
+  }else if(item.t==='servers'||item.t==='prices'){
+    sbQueue=sbQueue.filter(q=>q.t!==item.t);
+  }else if(item.t==='notes'){
+    const key=`${item.d.date}|${item.d.sess}`;
+    sbQueue=sbQueue.filter(q=>!(q.t==='notes'&&`${q.d.date}|${q.d.sess}`===key));
+  }
+  sbQueue.push(item);
+}
+
+async function sbSyncSession(data,date,sess){
+  if(!sb||!sbOnline){sbEnqueue({t:'session',d:{data,date,sess}});return;}
+  const d=date||currentDate,s=sess||currentSession;
+  setSyncChip('syncing');
+  try{
+    const rows=Object.entries(data).map(([cid,cdata])=>({date:d,session:s,cabana_id:cid,data:cdata,updated_at:new Date().toISOString()}));
+    if(rows.length) await sb.from('cabana_sessions').upsert(rows,{onConflict:'date,session,cabana_id'});
+    setSyncChip('online');
+  }catch(e){console.warn('sbSyncSession:',e);setSyncChip('offline');}
+}
+
+async function sbSyncServers(){
+  if(!sb||!sbOnline){sbEnqueue({t:'servers'});return;}
+  try{
+    // Upsert current servers by name, then delete any that were removed
+    if(servers.length){
+      await sb.from('servers_list').upsert(
+        servers.map(s=>({name:s.name,color:s.color,updated_at:new Date().toISOString()})),
+        {onConflict:'name'}
+      );
+    }
+    const {data:existing}=await sb.from('servers_list').select('id,name');
+    if(existing&&existing.length){
+      const current=new Set(servers.map(s=>s.name));
+      const toDelete=existing.filter(r=>!current.has(r.name)).map(r=>r.id);
+      if(toDelete.length) await sb.from('servers_list').delete().in('id',toDelete);
+    }
+    setSyncChip('online');
+  }catch(e){console.warn('sbSyncServers:',e);}
+}
+
+async function sbSyncPrices(){
+  if(!sb||!sbOnline){sbEnqueue({t:'prices'});return;}
+  try{
+    const rows=Object.entries(prices).map(([sid,p])=>({section_id:sid,price:parseFloat(p)||0,updated_at:new Date().toISOString()}));
+    if(rows.length) await sb.from('prices_config').upsert(rows,{onConflict:'section_id'});
+    setSyncChip('online');
+  }catch(e){console.warn('sbSyncPrices:',e);}
+}
+
+async function sbSyncShiftNotes(date,sess,notes){
+  if(!sb||!sbOnline){sbEnqueue({t:'notes',d:{date,sess,notes}});return;}
+  try{
+    await sb.from('shift_notes').upsert({date,session:sess,notes:notes||'',updated_at:new Date().toISOString()},{onConflict:'date,session'});
+    setSyncChip('online');
+  }catch(e){console.warn('sbSyncShiftNotes:',e);}
+}
+
+async function sbDrainQueue(){
+  if(!sb||!sbOnline||!sbQueue.length) return;
+  const q=[...sbQueue];sbQueue=[];
+  for(const item of q){
+    if(item.t==='session') await sbSyncSession(item.d.data,item.d.date,item.d.sess);
+    else if(item.t==='servers') await sbSyncServers();
+    else if(item.t==='prices') await sbSyncPrices();
+    else if(item.t==='notes') await sbSyncShiftNotes(item.d.date,item.d.sess,item.d.notes);
+  }
+}
+
+async function sbInitialLoad(){
+  if(!sb) return;
+  try{
+    const {data:srvData}=await sb.from('servers_list').select('*').order('updated_at');
+    if(srvData&&srvData.length){servers=srvData.map(r=>({name:r.name,color:r.color}));lss('cb_servers_v2',JSON.stringify(servers));}
+    const {data:priceData}=await sb.from('prices_config').select('*');
+    if(priceData&&priceData.length){prices={};priceData.forEach(r=>{prices[r.section_id]=r.price;});lss('cb_prices',JSON.stringify(prices));}
+    const today=todayKey();
+    const {data:sessData}=await sb.from('cabana_sessions').select('*').eq('date',today);
+    if(sessData&&sessData.length){
+      const bySession={};
+      sessData.forEach(r=>{if(!bySession[r.session])bySession[r.session]={};bySession[r.session][r.cabana_id]=r.data;});
+      Object.entries(bySession).forEach(([sess,data])=>saveSessionLocal(data,today,sess));
+    }
+    const {data:notesData}=await sb.from('shift_notes').select('*').eq('date',today);
+    if(notesData&&notesData.length) notesData.forEach(r=>lss(`cb_shiftnotes_${today}_${r.session}`,r.notes||''));
+    render();loadShiftNotes();
+  }catch(e){console.warn('sbInitialLoad:',e);}
+}
+
+function sbSetupRealtime(){
+  if(!sb) return;
+  sb.channel('cb-realtime')
+    .on('postgres_changes',{event:'*',schema:'public',table:'cabana_sessions'},payload=>{
+      const row=payload.new;if(!row||payload.eventType==='DELETE') return;
+      const saved=loadSession(row.date,row.session);
+      saved[row.cabana_id]=row.data;
+      saveSessionLocal(saved,row.date,row.session);
+      if(row.date===currentDate&&row.session===currentSession){
+        render();
+        // Delay flash to allow render cycle to complete before animating
+        setTimeout(()=>flashCard(row.cabana_id),100);
+      }
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'shift_notes'},payload=>{
+      const row=payload.new;if(!row) return;
+      lss(`cb_shiftnotes_${row.date}_${row.session}`,row.notes||'');
+      if(row.date===currentDate&&row.session===currentSession) loadShiftNotes();
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'servers_list'},async ()=>{
+      const {data}=await sb.from('servers_list').select('*').order('updated_at');
+      if(data&&data.length){servers=data.map(r=>({name:r.name,color:r.color}));lss('cb_servers_v2',JSON.stringify(servers));render();}
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'prices_config'},async ()=>{
+      const {data}=await sb.from('prices_config').select('*');
+      if(data&&data.length){prices={};data.forEach(r=>{prices[r.section_id]=r.price;});lss('cb_prices',JSON.stringify(prices));render();}
+    })
+    .subscribe(status=>{
+      if(status==='SUBSCRIBED') setSyncChip('online');
+      else if(status==='CLOSED'||status==='CHANNEL_ERROR') setSyncChip('offline');
+    });
+}
+
+function initSupabase(){
+  try{
+    if(!window.supabase){setSyncChip('offline');return;}
+    sb=window.supabase.createClient(SB_URL,SB_KEY);
+    sbSetupRealtime();
+    sbInitialLoad();
+  }catch(e){console.warn('initSupabase:',e);setSyncChip('offline');}
+}
+
+window.addEventListener('online',()=>{sbOnline=true;setSyncChip('online');sbDrainQueue();});
+window.addEventListener('offline',()=>{sbOnline=false;setSyncChip('offline');});
+
+// ═══════════════════════════════════════
 function blankCab(id,section,label){
   return {id,section,label,group:'',count:'',server:'',status:'available',
     eventType:'',seasonPass:false,allDay:false,linkedGroup:'',
@@ -895,6 +1056,7 @@ function doSearch(q){
 function saveShiftNotes(){
   const v=document.getElementById('shift-notes').value;
   lss(`cb_shiftnotes_${currentDate}_${currentSession}`,v);
+  sbSyncShiftNotes(currentDate,currentSession,v);
 }
 function loadShiftNotes(){
   const el=document.getElementById('shift-notes');
@@ -1660,6 +1822,7 @@ document.documentElement.setAttribute('data-theme',savedTheme);
 document.getElementById('theme-btn').textContent=savedTheme==='dark'?'☀️':'🌙';
 updateDateLabel();loadShiftNotes();render();
 fetchWeather();
+initSupabase();
 </script>
 </body>
 </html>
