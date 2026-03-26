@@ -460,6 +460,32 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   #manager-view{display:block!important;padding:0!important;}
 }
 
+/* Tag for walk-in */
+.tag-walkin{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.tag-reservation{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+/* TV tags for walk-in/reservation */
+.tv-tag-walkin{background:rgba(251,146,60,.13);color:#fb923c;border:1px solid rgba(251,146,60,.28);}
+.tv-tag-reservation{background:rgba(96,165,250,.12);color:#93c5fd;border:1px solid rgba(96,165,250,.25);}
+
+/* ═══════════════════════ WRISTBAND ═══════════════════════ */
+.wristband-picker{display:none;margin-top:7px;}
+.wristband-picker.open{display:block;}
+.wb-color-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+.wb-color-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;border:2px solid transparent;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;transition:all .15s;background:var(--dim);}
+.wb-color-btn .wb-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.15);}
+.wb-color-btn.selected{border-color:var(--ocean);background:var(--pale);}
+.wb-meal-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.wb-meal-btn{padding:4px 12px;border-radius:16px;border:2px solid var(--border);background:var(--dim);font-family:'Nunito',sans-serif;font-weight:800;font-size:.71rem;cursor:pointer;color:var(--text);transition:all .15s;}
+.wb-meal-btn.selected{border-color:var(--ocean);background:var(--ocean);color:white;}
+/* Wristband tags on cards */
+.tag-wb{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:12px;font-size:.65rem;font-weight:800;border:1.5px solid;}
+.tag-wb .wb-dot-sm{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.1);}
+/* TV wristband tag */
+.tv-tag-wb{display:inline-flex;align-items:center;gap:3px;padding:2px 5px;border-radius:9px;font-size:.58rem;font-weight:800;}
+/* Kitchen wristband badge */
+.k-badge-wb{display:inline-flex;align-items:center;gap:4px;}
+.k-badge-wb .wb-dot-k{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.15);}
+
 /* ═══════════════════════ PASSWORD OVERLAY ═══════════════════════ */
 #pw-overlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#012233 0%,#0077b6 65%,#48cae4 100%);display:flex;align-items:center;justify-content:center;}
 #pw-overlay.hidden{display:none;}
@@ -471,6 +497,171 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 #pw-submit{width:100%;padding:10px;border:none;border-radius:10px;background:var(--ocean,#0077b6);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:background .15s;}
 #pw-submit:hover{background:#005f8e;}
 #pw-error{color:var(--coral,#ef476f);font-size:.8rem;margin-top:8px;min-height:1.1em;}
+
+/* ═══════════════════════ HOURLY WEATHER STRIP ═══════════════════════ */
+.hourly-weather{display:flex;gap:6px;overflow-x:auto;padding:6px 0 4px;scrollbar-width:none;}
+.hourly-weather::-webkit-scrollbar{display:none;}
+.hw-item{flex-shrink:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:5px 8px;text-align:center;min-width:52px;}
+.hw-time{font-size:.58rem;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;}
+.hw-icon{font-size:1.1rem;line-height:1.3;}
+.hw-temp{font-size:.72rem;font-weight:900;color:white;}
+/* Light theme hourly strip */
+.hw-light .hw-item{background:rgba(0,119,182,.07);border-color:rgba(0,119,182,.15);}
+.hw-light .hw-time{color:var(--sub);}
+.hw-light .hw-temp{color:var(--text);}
+
+/* ═══════════════════════ LATE ARRIVALS ═══════════════════════ */
+.late-arr-item{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--dim);border-radius:8px;margin-bottom:4px;font-size:.76rem;font-weight:700;color:var(--text);flex-wrap:wrap;}
+.late-arr-item.arrived{background:#edfaf5;border:1px solid #34d399;}
+.late-arr-name{flex:1;font-weight:800;}
+.late-arr-type{font-size:.65rem;font-weight:700;color:var(--sub);background:var(--pale);border-radius:5px;padding:1px 6px;}
+.late-arr-ts{font-size:.62rem;color:var(--mint);font-weight:800;}
+.btn-mark-arrived{padding:3px 8px;border:none;border-radius:6px;background:#06d6a0;color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.62rem;cursor:pointer;white-space:nowrap;}
+.btn-mark-arrived.done{background:#e2e8f0;color:#64748b;cursor:default;}
+.btn-rm-late{background:none;border:none;cursor:pointer;color:var(--coral);font-size:.9rem;font-weight:900;padding:0 2px;line-height:1;}
+.add-late-row{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap;}
+.add-late-row input{flex:2;min-width:80px;padding:5px 8px;border:2px solid var(--border);border-radius:7px;font-family:'Nunito',sans-serif;font-size:.78rem;color:var(--text);background:var(--input-bg);}
+.add-late-row select{flex:2;min-width:90px;padding:5px 6px;border:2px solid var(--border);border-radius:7px;font-family:'Nunito',sans-serif;font-size:.76rem;color:var(--text);background:var(--input-bg);}
+.add-late-row input:focus,.add-late-row select:focus{outline:none;border-color:var(--ocean);}
+.btn-add-late{padding:5px 10px;background:var(--ocean);color:white;border:none;border-radius:7px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;cursor:pointer;white-space:nowrap;}
+
+/* Tag for server requested */
+.tag-req{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
+.tag-late{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+
+/* ═══════════════════════ MANAGER SETTINGS DROPDOWN ═══════════════════════ */
+.mgr-settings-wrap{background:var(--panel-bg);border-radius:14px;padding:11px 13px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.mgr-settings-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.mgr-settings-hdr h3{font-family:'Boogaloo',cursive;font-size:1.05rem;color:var(--ocean);margin:0;}
+.mgr-settings-arrow{font-size:.8rem;color:var(--sub);transition:transform .2s;}
+.mgr-settings-arrow.open{transform:rotate(180deg);}
+.mgr-settings-body{display:none;margin-top:10px;}
+.mgr-settings-body.open{display:block;}
+.settings-section{margin-bottom:12px;}
+.settings-section-title{font-size:.68rem;font-weight:900;color:var(--mid);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid var(--border);}
+.ticket-price-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.tp-row{display:flex;flex-direction:column;gap:2px;}
+.tp-row label{font-size:.63rem;font-weight:800;color:#667;text-transform:uppercase;letter-spacing:.3px;}
+.tp-wrap{display:flex;align-items:center;gap:3px;background:var(--pale);border:2px solid var(--border);border-radius:7px;padding:4px 8px;}
+.tp-wrap span{font-weight:800;color:var(--sub);font-size:.84rem;}
+.tp-wrap input{border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:.84rem;font-weight:800;color:var(--text);width:55px;}
+.tp-wrap input:focus{outline:none;}
+.threshold-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.threshold-item{display:flex;align-items:center;gap:4px;}
+.threshold-item label{font-size:.68rem;font-weight:800;color:var(--text);}
+.threshold-item input{width:52px;padding:4px 6px;border:2px solid var(--border);border-radius:6px;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--text);background:var(--input-bg);text-align:center;}
+.threshold-item input:focus{outline:none;border-color:var(--sky);}
+
+/* Peak indicator */
+.peak-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;font-size:.65rem;font-weight:800;}
+.peak-green{background:#dcfce7;color:#15803d;}
+.peak-yellow{background:#fef9c3;color:#854d0e;}
+.peak-red{background:#fee2e2;color:#991b1b;}
+[data-theme="dark"] .peak-green{background:rgba(6,214,160,.2);color:#6ee7b7;}
+[data-theme="dark"] .peak-yellow{background:rgba(245,158,11,.2);color:#fcd34d;}
+[data-theme="dark"] .peak-red{background:rgba(239,68,68,.2);color:#fca5a5;}
+
+/* ═══════════════════════ SERVER STATS ═══════════════════════ */
+.srv-stats-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.srv-stat-card{background:var(--dim);border-radius:10px;padding:6px 10px;min-width:80px;flex:1;}
+.srv-stat-name{font-size:.62rem;font-weight:800;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.srv-stat-row{display:flex;justify-content:space-between;align-items:center;font-size:.63rem;font-weight:700;color:var(--sub);}
+.srv-stat-val{font-weight:900;color:var(--ocean);font-size:.78rem;}
+
+/* ═══════════════════════ HEADCOUNT VIEW ═══════════════════════ */
+#headcount-view{min-height:calc(100vh - 57px);display:none;flex-direction:column;align-items:center;justify-content:center;background:#012233;transition:background .2s;}
+#headcount-view.active{display:flex;}
+#headcount-view.hc-light{background:#f0f7fb;}
+.hc-counter-wrap{text-align:center;padding:20px;}
+.hc-title{font-family:'Boogaloo',cursive;font-size:1.8rem;color:var(--sand);margin-bottom:6px;letter-spacing:2px;}
+.hc-subtitle{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.45);margin-bottom:30px;}
+#headcount-view.hc-light .hc-title{color:var(--ocean);}
+#headcount-view.hc-light .hc-subtitle{color:var(--sub);}
+.hc-number{font-family:'Boogaloo',cursive;font-size:clamp(5rem,20vw,10rem);color:white;line-height:1;margin-bottom:20px;transition:transform .1s;}
+#headcount-view.hc-light .hc-number{color:var(--ocean);}
+.hc-number.bump{transform:scale(1.12);}
+.hc-btns{display:flex;gap:16px;justify-content:center;margin-bottom:24px;}
+.hc-btn{width:80px;height:80px;border-radius:50%;border:none;font-size:2.5rem;font-weight:900;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(0,0,0,.3);}
+.hc-btn:active{transform:scale(.9);}
+.hc-btn-minus{background:#ef476f;color:white;}
+.hc-btn-plus{background:#06d6a0;color:white;}
+.hc-btn-big{width:100px;height:100px;font-size:3.2rem;}
+.hc-reset{padding:8px 22px;border-radius:10px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-family:'Nunito',sans-serif;font-weight:800;font-size:.8rem;cursor:pointer;transition:all .15s;}
+#headcount-view.hc-light .hc-reset{border-color:var(--border);background:var(--panel-bg);color:var(--ocean);}
+.hc-reset:hover{background:rgba(255,255,255,.2);}
+.hc-stats-row{display:flex;gap:14px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+.hc-stat{text-align:center;}
+.hc-stat-num{font-family:'Boogaloo',cursive;font-size:1.6rem;color:var(--sky);}
+.hc-stat-lbl{font-size:.6rem;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;}
+#headcount-view.hc-light .hc-stat-num{color:var(--ocean);}
+#headcount-view.hc-light .hc-stat-lbl{color:var(--sub);}
+.hc-page-ctrl{position:absolute;top:65px;right:12px;display:flex;gap:6px;}
+.hc-page-btn{padding:5px 11px;border-radius:8px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:'Nunito',sans-serif;font-weight:800;font-size:.65rem;cursor:pointer;}
+#headcount-view.hc-light .hc-page-btn{border-color:var(--border);background:var(--panel-bg);color:var(--ocean);}
+
+/* ═══════════════════════ BREAK ROOM VIEW ═══════════════════════ */
+#breakroom-view{min-height:calc(100vh - 57px);display:none;flex-direction:column;align-items:center;justify-content:center;transition:background .2s;}
+#breakroom-view.active{display:flex;}
+#breakroom-view.br-light{background:#f0f7fb;}
+#breakroom-view.br-dark{background:#0d1117;}
+.br-indicator{border-radius:24px;padding:40px 60px;text-align:center;transition:all .3s;margin:20px;}
+.br-indicator.orders-on{background:linear-gradient(135deg,#06d6a0,#2a9d8f);box-shadow:0 0 60px rgba(6,214,160,.4);}
+.br-indicator.orders-off{background:linear-gradient(135deg,#ef476f,#c0392b);box-shadow:0 0 60px rgba(239,71,111,.4);}
+.br-status-icon{font-size:clamp(3rem,10vw,6rem);margin-bottom:10px;}
+.br-status-text{font-family:'Boogaloo',cursive;font-size:clamp(2rem,7vw,4rem);color:white;letter-spacing:2px;}
+.br-status-sub{font-size:.9rem;font-weight:700;color:rgba(255,255,255,.7);margin-top:6px;}
+.br-page-ctrl{position:absolute;top:65px;right:12px;display:flex;gap:6px;}
+.br-page-btn{padding:5px 11px;border-radius:8px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:'Nunito',sans-serif;font-weight:800;font-size:.65rem;cursor:pointer;}
+#breakroom-view.br-light .br-page-btn{border-color:var(--border);background:var(--panel-bg);color:var(--ocean);}
+.br-help-flash{margin-top:16px;padding:10px 24px;border-radius:12px;background:rgba(255,255,255,.15);font-size:.85rem;font-weight:800;color:white;display:none;}
+.br-help-flash.active{display:block;animation:helpFlash 1.2s ease-in-out infinite;}
+
+/* ═══════════════════════ KITCHEN ENHANCEMENTS ═══════════════════════ */
+#kitchen-view.k-light{background:#f0f7fb;}
+#kitchen-view.k-light .kitchen-title{color:var(--ocean);}
+#kitchen-view.k-light .kitchen-subtitle{color:var(--sub);}
+#kitchen-view.k-light .kitchen-section-title{color:var(--mid);border-bottom-color:var(--border);}
+#kitchen-view.k-light .k-card{background:var(--panel-bg);border-color:var(--border);}
+#kitchen-view.k-light .k-card.s-reserved{background:var(--bg-res);border-color:var(--brd-res);}
+#kitchen-view.k-light .k-card.s-checkedin{background:var(--bg-in);border-color:var(--brd-in);}
+#kitchen-view.k-light .k-card.s-paid{background:var(--paid-bg);border-color:var(--paid-brd);}
+#kitchen-view.k-light .k-name{color:var(--text);}
+#kitchen-view.k-light .k-group{color:var(--text);}
+#kitchen-view.k-light .k-row{color:var(--sub);}
+.kitchen-ctrl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.k-help-btn{padding:6px 14px;border-radius:9px;border:2px solid;font-family:'Nunito',sans-serif;font-weight:800;font-size:.74rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.k-help-btn.off{border-color:#ef476f;color:#ef476f;background:rgba(239,71,111,.1);}
+.k-help-btn.on{border-color:#ef476f;background:#ef476f;color:white;animation:helpPulse .9s ease-in-out infinite;}
+.k-orders-btn{padding:6px 14px;border-radius:9px;border:2px solid;font-family:'Nunito',sans-serif;font-weight:800;font-size:.74rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.k-orders-btn.on{border-color:#06d6a0;background:#06d6a0;color:white;}
+.k-orders-btn.off{border-color:#94a3b8;color:#94a3b8;background:rgba(148,163,184,.1);}
+.k-page-toggle{padding:5px 11px;border-radius:8px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:'Nunito',sans-serif;font-weight:800;font-size:.65rem;cursor:pointer;}
+#kitchen-view.k-light .k-page-toggle{border-color:var(--border);background:var(--panel-bg);color:var(--ocean);}
+@keyframes helpPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(239,71,111,.5)}50%{opacity:.85;box-shadow:0 0 0 8px rgba(239,71,111,0)}}
+@keyframes helpFlash{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.97)}}
+.k-summary-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.k-sum-pill{flex:1;min-width:80px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:7px 10px;text-align:center;}
+.k-sum-num{font-family:'Boogaloo',cursive;font-size:1.4rem;line-height:1;}
+.k-sum-lbl{font-size:.55rem;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
+#kitchen-view.k-light .k-sum-pill{background:var(--panel-bg);border-color:var(--border);}
+#kitchen-view.k-light .k-sum-num{color:var(--text);}
+#kitchen-view.k-light .k-sum-lbl{color:var(--sub);}
+.k-allergy-panel{background:rgba(239,68,68,.1);border:1.5px solid rgba(239,68,68,.3);border-radius:11px;padding:10px 12px;margin-bottom:12px;}
+.k-allergy-title{font-size:.68rem;font-weight:900;color:#fca5a5;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.k-allergy-list{display:flex;flex-wrap:wrap;gap:5px;}
+.k-allergy-chip{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.35);border-radius:8px;padding:3px 8px;font-size:.68rem;font-weight:800;color:#fca5a5;display:flex;align-items:center;gap:4px;}
+.k-allergy-chip .ac-cab{font-size:.58rem;opacity:.7;}
+#kitchen-view.k-light .k-allergy-panel{background:#fef2f2;border-color:#fecaca;}
+#kitchen-view.k-light .k-allergy-title{color:#991b1b;}
+#kitchen-view.k-light .k-allergy-chip{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
+/* Help flash on TV */
+.tv-help-banner{background:rgba(239,71,111,.22);border:2px solid #ef476f;border-radius:11px;padding:10px 16px;text-align:center;display:none;margin-bottom:10px;animation:helpFlash 1s ease-in-out infinite;}
+.tv-help-banner.active{display:block;}
+.tv-help-text{font-family:'Boogaloo',cursive;font-size:1.3rem;color:#ff6b8a;letter-spacing:1px;}
+/* Kitchen hourly weather in light mode */
+#kitchen-view.k-light .hw-item{background:rgba(0,119,182,.07);border-color:rgba(0,119,182,.15);}
+#kitchen-view.k-light .hw-time{color:var(--sub);}
+#kitchen-view.k-light .hw-temp{color:var(--text);}
 </style>
 </head>
 <body>
@@ -514,10 +705,12 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
   <div class="topbar-right">
     <div class="view-tabs">
-      <button class="view-tab active" id="tab-manager" onclick="switchView('manager')">📋 Mgr</button>
-      <button class="view-tab"        id="tab-kitchen" onclick="switchView('kitchen')">👨‍🍳 Kit</button>
-      <button class="view-tab"        id="tab-tv"      onclick="switchView('tv')">📺 TV</button>
-      <button class="view-tab"        id="tab-reports" onclick="switchView('reports')">📊 Rpts</button>
+      <button class="view-tab active" id="tab-manager"   onclick="switchView('manager')">📋 Mgr</button>
+      <button class="view-tab"        id="tab-kitchen"   onclick="switchView('kitchen')">👨‍🍳 Kit</button>
+      <button class="view-tab"        id="tab-tv"        onclick="switchView('tv')">📺 TV</button>
+      <button class="view-tab"        id="tab-headcount" onclick="switchView('headcount')">🌊 HC</button>
+      <button class="view-tab"        id="tab-breakroom" onclick="switchView('breakroom')">🍕 BR</button>
+      <button class="view-tab"        id="tab-reports"   onclick="switchView('reports')">📊 Rpts</button>
     </div>
     <button class="icon-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">🌙</button>
     <button class="icon-btn" onclick="undoLast()" id="undo-btn" title="Undo last clear" style="opacity:.4">↩️</button>
@@ -534,6 +727,50 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
     <button class="toolbar-btn success" onclick="exportCSV()">📤 Export CSV</button>
   </div>
 
+  <!-- Manager Settings Dropdown -->
+  <div class="mgr-settings-wrap" id="mgr-settings-wrap">
+    <div class="mgr-settings-hdr" onclick="toggleMgrSettings()">
+      <h3>⚙️ Manager Controls</h3>
+      <span class="mgr-settings-arrow" id="mgr-settings-arrow">▼</span>
+    </div>
+    <div class="mgr-settings-body" id="mgr-settings-body">
+      <!-- Cabana Pricing -->
+      <div class="settings-section">
+        <div class="settings-section-title">🏕️ Cabana Pricing</div>
+        <div class="price-grid" id="price-grid"></div>
+      </div>
+      <!-- Ticket Pricing -->
+      <div class="settings-section">
+        <div class="settings-section-title">🎟 Ticket Pricing</div>
+        <div class="ticket-price-grid" id="ticket-price-grid"></div>
+      </div>
+      <!-- Peak Thresholds -->
+      <div class="settings-section">
+        <div class="settings-section-title">📊 Peak Time Thresholds (Occupancy %)</div>
+        <div class="threshold-row">
+          <div class="threshold-item">
+            <label>🟡 Yellow at</label>
+            <input type="number" id="thresh-first" min="1" max="99" placeholder="70" oninput="saveManagerSettings()">
+            <span style="font-size:.72rem;color:var(--sub);font-weight:700">%</span>
+          </div>
+          <div class="threshold-item">
+            <label>🔴 Red at</label>
+            <input type="number" id="thresh-second" min="1" max="100" placeholder="90" oninput="saveManagerSettings()">
+            <span style="font-size:.72rem;color:var(--sub);font-weight:700">%</span>
+          </div>
+        </div>
+      </div>
+      <!-- Server Stats Toggle -->
+      <div class="settings-section" style="margin-bottom:0">
+        <div class="settings-section-title">👤 Display Options</div>
+        <div class="toggle-row">
+          <div><div class="toggle-lbl">Show Server Performance Stats</div></div>
+          <label class="toggle"><input type="checkbox" id="setting-show-srv-stats" onchange="saveManagerSettings();render()"><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Servers + Workload -->
   <div class="panel server-panel-wrap">
     <div class="panel-hdr">
@@ -546,18 +783,22 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
       <button class="btn-add" onclick="addServer()">+ Add</button>
     </div>
     <div class="workload-row" id="workload-row"></div>
+    <div id="srv-stats-wrap" style="display:none">
+      <div style="font-size:.63rem;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.4px;margin-top:9px;margin-bottom:4px;">📈 Server Performance</div>
+      <div class="srv-stats-grid" id="srv-stats-grid"></div>
+    </div>
+  </div>
+
+  <!-- Hourly Weather Strip (Manager) -->
+  <div class="panel" id="mgr-weather-panel" style="display:none">
+    <div class="panel-hdr"><h3>🌤 Hourly Forecast</h3><span class="panel-hint">Draper, UT</span></div>
+    <div class="hourly-weather hw-light" id="mgr-hourly-weather"></div>
   </div>
 
   <!-- Shift Notes -->
   <div class="panel">
     <h3>📝 Shift Notes</h3>
     <textarea class="shift-notes-area" id="shift-notes" placeholder="Notes for this session (visible to manager only)…" oninput="saveShiftNotes()"></textarea>
-  </div>
-
-  <!-- Pricing -->
-  <div class="panel price-panel-wrap">
-    <h3>💰 Pricing & Capacity</h3>
-    <div class="price-grid" id="price-grid"></div>
   </div>
 
   <!-- Filter bar -->
@@ -587,6 +828,22 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
       <div class="kitchen-title">👨‍🍳 Kitchen Board</div>
       <div class="kitchen-subtitle" id="kitchen-subtitle">—</div>
     </div>
+    <div class="kitchen-ctrl-row">
+      <button class="k-help-btn off" id="k-help-btn" onclick="toggleKitchenHelp()">🚨 Help Needed</button>
+      <button class="k-orders-btn off" id="k-orders-btn" onclick="toggleBreakroomOrders()">🍕 Orders</button>
+      <button class="k-page-toggle" onclick="toggleKitchenDark()">🌙</button>
+    </div>
+  </div>
+  <!-- Guest summary bar -->
+  <div class="k-summary-bar" id="k-summary-bar"></div>
+  <!-- Allergy panel -->
+  <div class="k-allergy-panel" id="k-allergy-panel" style="display:none">
+    <div class="k-allergy-title">⚠️ Active Allergies</div>
+    <div class="k-allergy-list" id="k-allergy-list"></div>
+  </div>
+  <!-- Hourly weather strip -->
+  <div style="margin-bottom:10px;display:none" id="k-weather-wrap">
+    <div class="hourly-weather" id="k-hourly-weather"></div>
   </div>
   <div id="kitchen-container"></div>
 </div>
@@ -597,11 +854,20 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
     <button class="tv-ctrl-btn" id="tv-zoom-btn" onclick="toggleTVZoom()">🔍 Zoom</button>
     <button class="tv-ctrl-btn" id="tv-scroll-btn" onclick="toggleTVScroll()">▶ Auto-Scroll</button>
   </div>
+  <!-- Kitchen needs help banner -->
+  <div class="tv-help-banner" id="tv-help-banner">
+    <div class="tv-help-text">🚨 KITCHEN NEEDS HELP 🚨</div>
+    <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Check with kitchen staff</div>
+  </div>
   <div class="tv-header">
     <div class="tv-title">🌊 Cowabunga Bay — Cabana Status</div>
     <div class="tv-subtitle" id="tv-subtitle">—</div>
   </div>
   <div class="tv-weather-bar" id="tv-weather-bar"></div>
+  <!-- Hourly weather strip for TV -->
+  <div style="margin-bottom:10px;display:none" id="tv-hourly-wrap">
+    <div class="hourly-weather" id="tv-hourly-weather"></div>
+  </div>
   <div class="tv-toprow"    id="tv-stats"></div>
   <div class="tv-legend"    id="tv-legend"></div>
   <div class="tv-sections"  id="tv-sections"></div>
@@ -645,6 +911,37 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   </div>
 </div>
 
+<!-- ═══════════════ HEADCOUNT VIEW ═══════════════ -->
+<div id="headcount-view" class="view" style="position:relative;">
+  <div class="hc-page-ctrl">
+    <button class="hc-page-btn" onclick="toggleHeadcountDark()">🌙</button>
+  </div>
+  <div class="hc-counter-wrap">
+    <div class="hc-title">🌊 Park Headcount</div>
+    <div class="hc-subtitle" id="hc-subtitle">Gate Keeper · Real-Time Count</div>
+    <div class="hc-number" id="hc-display">0</div>
+    <div class="hc-btns">
+      <button class="hc-btn hc-btn-minus hc-btn-big" onclick="hcAdjust(-1)">−</button>
+      <button class="hc-btn hc-btn-plus hc-btn-big" onclick="hcAdjust(1)">+</button>
+    </div>
+    <button class="hc-reset" onclick="hcReset()">Reset to 0</button>
+    <div class="hc-stats-row" id="hc-stats-row"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ BREAK ROOM VIEW ═══════════════ -->
+<div id="breakroom-view" class="view br-dark" style="position:relative;">
+  <div class="br-page-ctrl">
+    <button class="br-page-btn" onclick="toggleBreakroomDark()">🌙</button>
+  </div>
+  <div class="br-indicator orders-off" id="br-indicator">
+    <div class="br-status-icon" id="br-status-icon">🚫</div>
+    <div class="br-status-text" id="br-status-text">ORDERS CLOSED</div>
+    <div class="br-status-sub" id="br-status-sub">Kitchen cannot take orders right now</div>
+  </div>
+  <div class="br-help-flash" id="br-help-flash">🚨 KITCHEN NEEDS HELP — Please assist! 🚨</div>
+</div>
+
 <!-- ═══════════════ MODAL ═══════════════ -->
 <div class="overlay" id="overlay">
  <div class="modal">
@@ -663,6 +960,14 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   <div class="field"><label>Group Name</label><input type="text" id="f-group" placeholder="e.g. Smith Family" oninput="modalAutoSave()"></div>
   <div class="field"><label>Headcount</label><select id="f-count"></select></div>
   <div class="field"><label>Assigned Server</label><select id="f-server"></select></div>
+  <div class="toggle-row">
+    <div><div class="toggle-lbl">🔒 Requested by Guest</div><div class="toggle-sub">Prevents accidental server reassignment</div></div>
+    <label class="toggle"><input type="checkbox" id="f-srv-requested"><span class="toggle-slider"></span></label>
+  </div>
+  <div class="toggle-row">
+    <div><div class="toggle-lbl">🚶 Walk-In <span style="font-weight:600;font-size:.72rem;color:var(--sub)">(vs. reservation)</span></div><div class="toggle-sub">Guest arrived without a prior reservation</div></div>
+    <label class="toggle"><input type="checkbox" id="f-walkin-type"><span class="toggle-slider"></span></label>
+  </div>
   <div class="field"><label>Event Type</label>
     <select id="f-event">
       <option value="">— None —</option>
@@ -707,6 +1012,32 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   <div class="toggle-row">
     <div><div class="toggle-lbl">☀️ All-Day Booking</div><div class="toggle-sub">Mirrors to both AM & PM sessions</div></div>
     <label class="toggle"><input type="checkbox" id="f-allday"><span class="toggle-slider"></span></label>
+  </div>
+
+  <div class="modal-divider">🪬 Wristband</div>
+  <div class="toggle-row">
+    <div><div class="toggle-lbl">Has Wristband</div></div>
+    <label class="toggle"><input type="checkbox" id="f-has-wristband" onchange="updateWristbandUI()"><span class="toggle-slider"></span></label>
+  </div>
+  <div class="wristband-picker" id="wristband-picker">
+    <div style="font-size:.68rem;font-weight:800;color:var(--sub);margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px;">Color</div>
+    <div class="wb-color-row" id="wb-color-row">
+      <button class="wb-color-btn" data-color="white"  onclick="selectWBColor('white')"><div class="wb-dot" style="background:#fff;box-shadow:0 0 0 2px #d1d5db;"></div>White</button>
+      <button class="wb-color-btn" data-color="teal"   onclick="selectWBColor('teal')"><div class="wb-dot" style="background:#14b8a6;"></div>Teal</button>
+      <button class="wb-color-btn" data-color="green"  onclick="selectWBColor('green')"><div class="wb-dot" style="background:#22c55e;"></div>Green</button>
+      <button class="wb-color-btn" data-color="red"    onclick="selectWBColor('red')"><div class="wb-dot" style="background:#ef4444;"></div>Red</button>
+      <button class="wb-color-btn" data-color="orange" onclick="selectWBColor('orange')"><div class="wb-dot" style="background:#f97316;"></div>Orange</button>
+      <button class="wb-color-btn" data-color="yellow" onclick="selectWBColor('yellow')"><div class="wb-dot" style="background:#eab308;"></div>Yellow</button>
+      <button class="wb-color-btn" data-color="meal-dessert" onclick="selectWBColor('meal-dessert')"><div class="wb-dot" style="background:linear-gradient(135deg,#f97316,#a855f7);"></div>Meal / Dessert</button>
+    </div>
+    <div id="wb-meal-section" style="display:none">
+      <div style="font-size:.68rem;font-weight:800;color:var(--sub);margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px;">Includes</div>
+      <div class="wb-meal-row">
+        <button class="wb-meal-btn" data-meal="meal"    onclick="selectWBMeal('meal')">🍽 Meal</button>
+        <button class="wb-meal-btn" data-meal="dessert" onclick="selectWBMeal('dessert')">🍰 Dessert</button>
+        <button class="wb-meal-btn" data-meal="both"    onclick="selectWBMeal('both')">🍽🍰 Both</button>
+      </div>
+    </div>
   </div>
 
   <div class="modal-divider">🎂 Dessert</div>
@@ -760,6 +1091,20 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   <div style="font-size:.68rem;color:#9aacba;margin-bottom:4px;">Select other cabanas reserved together</div>
   <div class="link-row" id="link-options"></div>
 
+  <div class="modal-divider">⏳ Late Arrivals</div>
+  <div style="font-size:.68rem;color:#9aacba;margin-bottom:6px;">Track guests joining later — mark arrived when they check in</div>
+  <div id="late-arrivals-list"></div>
+  <div class="add-late-row">
+    <input type="text" id="late-name-input" placeholder="Name…">
+    <select id="late-type-input">
+      <option value='Over 48"'>Over 48"</option>
+      <option value='Under 48"'>Under 48"</option>
+      <option value="Senior">Senior</option>
+      <option value="Spectator">Spectator</option>
+    </select>
+    <button class="btn-add-late" onclick="addLateArrival()">+ Add</button>
+  </div>
+
   <div class="modal-actions">
     <button class="btn-cancel" onclick="closeModal()">Cancel</button>
     <button class="btn-clear"  onclick="clearCabana()">🗑 Clear</button>
@@ -807,6 +1152,15 @@ const SECTIONS=[
   {id:'noarea',   label:'📋 No Area Groups', count:0, prefix:'Group',    cap:'Varies',     isFun:true,isNoArea:true},
 ];
 const PRESET_COLORS=['#e63946','#f4a261','#2a9d8f','#7209b7','#3a86ff','#fb8500','#c77dff','#023e8a','#588157','#e9c46a','#00b4d8','#d62828','#06d6a0','#ef476f','#ffd166','#118ab2'];
+const WB_COLORS={
+  white:      {css:'#ffffff',border:'#d1d5db',label:'White'},
+  teal:       {css:'#14b8a6',border:'#0d9488',label:'Teal'},
+  green:      {css:'#22c55e',border:'#16a34a',label:'Green'},
+  red:        {css:'#ef4444',border:'#dc2626',label:'Red'},
+  orange:     {css:'#f97316',border:'#ea580c',label:'Orange'},
+  yellow:     {css:'#eab308',border:'#ca8a04',label:'Yellow'},
+  'meal-dessert':{css:'linear-gradient(135deg,#f97316,#a855f7)',border:'#a855f7',label:'Meal/Dessert'},
+};
 const SESSION_TIMES={AM:{start:'10:30',end:'14:00'},PM:{start:'14:30',end:'18:00'}};
 
 // ═══════════════════════════════════════
@@ -819,9 +1173,13 @@ let modalId=null,modalStatus='available',isFunModal=false;
 let undoStack=null;
 let tvScrollInterval=null,tvZoomOn=false;
 let reportPeriod='week',calYear=new Date().getFullYear(),calMonth=new Date().getMonth(),selectedCalDay=null;
-let weatherData=null;
+let weatherData=null,hourlyWeatherData=[];
 let modalPhotos=[];
 let customLabels={};
+let helpNeeded=false,ordersOn=false;
+let kitchenDark=false,breakroomDark=false,headcountDark=false;
+let managerSettings={peakThresholds:{first:70,second:90},ticketPrices:{over48:25,under48:20,senior:15,spectator:10},showServerStats:false};
+let modalLateArrivals=[];
 
 // ═══════════════════════════════════════
 // STORAGE HELPERS
@@ -840,6 +1198,26 @@ function loadPrices(){try{const r=ls('cb_prices');return r?JSON.parse(r):{};}cat
 function savePrices(){lss('cb_prices',JSON.stringify(prices));sbSyncPrices();}
 function loadCustomLabels(){try{const r=ls('cb_labels');return r?JSON.parse(r):{};}catch(e){return{};}}
 function saveCustomLabels(){lss('cb_labels',JSON.stringify(customLabels));}
+function loadManagerSettings(){try{const r=ls('cb_mgrsettings');return r?{...managerSettings,...JSON.parse(r)}:managerSettings;}catch(e){return managerSettings;}}
+function saveManagerSettings(){
+  const t1=parseInt(document.getElementById('thresh-first')?.value)||managerSettings.peakThresholds.first;
+  const t2=parseInt(document.getElementById('thresh-second')?.value)||managerSettings.peakThresholds.second;
+  const ss=document.getElementById('setting-show-srv-stats')?.checked??managerSettings.showServerStats;
+  managerSettings.peakThresholds={first:t1,second:t2};
+  managerSettings.showServerStats=ss;
+  lss('cb_mgrsettings',JSON.stringify(managerSettings));
+  sbSyncKitchenState();
+}
+function loadSharedState(){
+  try{const r=ls('cb_shared_state');if(r){const d=JSON.parse(r);helpNeeded=!!d.helpNeeded;ordersOn=!!d.ordersOn;}}catch(e){}
+}
+function saveSharedState(){lss('cb_shared_state',JSON.stringify({helpNeeded,ordersOn}));sbSyncKitchenState();}
+async function sbSyncKitchenState(){
+  if(!sb||!sbOnline) return;
+  try{
+    await sb.from('app_state').upsert({key:'kitchen',helpNeeded,ordersOn,updated_at:new Date().toISOString()},{onConflict:'key'});
+  }catch(e){console.warn('sbSyncKitchenState:',e);}
+}
 
 // ═══════════════════════════════════════
 // DEBOUNCE UTILITY
@@ -956,6 +1334,10 @@ async function sbInitialLoad(){
     }
     const {data:notesData}=await sb.from('shift_notes').select('*').eq('date',today);
     if(notesData&&notesData.length) notesData.forEach(r=>lss(`cb_shiftnotes_${today}_${r.session}`,r.notes||''));
+    try{
+      const {data:stateData}=await sb.from('app_state').select('*').eq('key','kitchen');
+      if(stateData&&stateData.length){const s=stateData[0];helpNeeded=!!s.helpNeeded;ordersOn=!!s.ordersOn;updateHelpUI();updateOrdersUI();}
+    }catch(e){}
     render();loadShiftNotes();
   }catch(e){console.warn('sbInitialLoad:',e);}
 }
@@ -987,6 +1369,13 @@ function sbSetupRealtime(){
       const {data}=await sb.from('prices_config').select('*');
       if(data&&data.length){prices={};data.forEach(r=>{prices[r.section_id]=r.price;});lss('cb_prices',JSON.stringify(prices));render();}
     })
+    .on('postgres_changes',{event:'*',schema:'public',table:'app_state'},async payload=>{
+      const row=payload.new;if(!row) return;
+      if(row.key==='kitchen'){
+        helpNeeded=!!row.helpNeeded;ordersOn=!!row.ordersOn;
+        saveSharedState();updateHelpUI();updateOrdersUI();
+      }
+    })
     .subscribe(status=>{
       if(status==='SUBSCRIBED') setSyncChip('online');
       else if(status==='CLOSED'||status==='CHANNEL_ERROR') setSyncChip('offline');
@@ -1011,7 +1400,8 @@ function blankCab(id,section,label){
     eventType:'',seasonPass:false,allDay:false,linkedGroup:'',
     cake:false,cupcakes:false,walkin:false,candles:false,lighter:false,
     hasAllergy:false,allergies:[],tickets:{over48:0,under48:0,senior:0,spectator:0},
-    food:'',notes:'',checkedInTime:'',photos:[]};
+    food:'',notes:'',checkedInTime:'',photos:[],lateArrivals:[],serverRequested:false,walkIn:false,
+    hasWristband:false,wristbandColor:'',wristbandMealType:''};
 }
 
 function getCabanas(date,sess){
@@ -1077,22 +1467,65 @@ function toggleTheme(){
 // ═══════════════════════════════════════
 // WEATHER
 // ═══════════════════════════════════════
+function weatherCodeIcon(code){
+  if(code<=1) return '☀️';
+  if(code<=3) return '⛅';
+  if(code<=48) return '🌫';
+  if(code<=67) return '🌧';
+  if(code<=77) return '❄️';
+  if(code<=82) return '🌦';
+  return '🌩';
+}
+
 async function fetchWeather(){
   const chip=document.getElementById('weather-chip');
   const tvBar=document.getElementById('tv-weather-bar');
   chip.textContent='🌤 …';
   try{
-    // Draper UT lat/lon
-    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.5246&longitude=-111.8638&current_weather=true&temperature_unit=fahrenheit&wind_speed_unit=mph');
+    // Draper UT lat/lon — fetch current + hourly
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.5246&longitude=-111.8638&current_weather=true&hourly=temperature_2m,weathercode&temperature_unit=fahrenheit&wind_speed_unit=mph&forecast_days=1&timezone=America%2FDenver');
     const d=await r.json();
     const cw=d.current_weather;
-    const code=cw.weathercode;
-    const icon=code<=1?'☀️':code<=3?'⛅':code<=67?'🌧':code<=77?'❄️':'🌩';
+    const icon=weatherCodeIcon(cw.weathercode);
     const txt=`${icon} ${Math.round(cw.temperature)}°F`;
     weatherData=txt;
     chip.textContent=txt;
+
+    // Build hourly data for today
+    hourlyWeatherData=[];
+    if(d.hourly&&d.hourly.time){
+      const now=new Date();
+      d.hourly.time.forEach((t,i)=>{
+        const dt=new Date(t);
+        if(dt<now-3600000) return; // skip past hours (allow 1hr back)
+        hourlyWeatherData.push({
+          time:dt.toLocaleTimeString([],{hour:'numeric',hour12:true}),
+          icon:weatherCodeIcon(d.hourly.weathercode[i]),
+          temp:Math.round(d.hourly.temperature_2m[i])
+        });
+      });
+    }
+
+    // Update TV current weather bar
     if(tvBar) tvBar.innerHTML=`<span>${txt}</span><span style="opacity:.5">Draper, UT</span><span>${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>`;
+
+    // Render hourly strips on all views
+    renderHourlyWeather();
   }catch(e){chip.textContent='🌤 —';}
+}
+
+function renderHourlyWeather(){
+  if(!hourlyWeatherData.length) return;
+  const html=hourlyWeatherData.map(h=>`<div class="hw-item"><div class="hw-time">${h.time}</div><div class="hw-icon">${h.icon}</div><div class="hw-temp">${h.temp}°</div></div>`).join('');
+  const mgrEl=document.getElementById('mgr-hourly-weather');
+  const mgrPanel=document.getElementById('mgr-weather-panel');
+  if(mgrEl){mgrEl.innerHTML=html;if(mgrPanel)mgrPanel.style.display='block';}
+  const kEl=document.getElementById('k-hourly-weather');
+  const kWrap=document.getElementById('k-weather-wrap');
+  if(kEl){kEl.innerHTML=html;if(kWrap)kWrap.style.display='block';}
+  const tvEl=document.getElementById('tv-hourly-weather');
+  const tvWrap=document.getElementById('tv-hourly-wrap');
+  if(tvEl){tvEl.innerHTML=html;if(tvWrap)tvWrap.style.display='block';}
 }
 
 // ═══════════════════════════════════════
@@ -1156,10 +1589,10 @@ function render(){
   renderStats(cabs);
   renderServerChips();
   renderWorkload(cabs);
-  renderPriceGrid();
   renderSections(cabs);
   renderKitchen(cabs);
   renderTV(cabs);
+  if(document.getElementById('headcount-view')?.classList.contains('active')) renderHeadcount();
 }
 
 function renderStats(cabs){
@@ -1170,11 +1603,23 @@ function renderStats(cabs){
   const cabHC=v.filter(c=>c.status==='checkedin'||c.status==='paid').reduce((s,c)=>s+(+c.count||0),0);
   const parkKey=`cb_parkcount_${currentDate}_${currentSession}`;
   let parkCount=0;try{parkCount=parseInt(ls(parkKey)||'0');}catch(e){}
+
+  // Compute total cabanas (non-noarea only for occupancy) and occupancy %
+  const totalCabs=v.filter(c=>c.section!=='noarea').length||1;
+  const activeCabs=v.filter(c=>c.section!=='noarea'&&c.status!=='available').length;
+  const occPct=Math.round((activeCabs/totalCabs)*100);
+  const t1=managerSettings.peakThresholds.first||70;
+  const t2=managerSettings.peakThresholds.second||90;
+  let peakCls='peak-green',peakEmoji='🟢';
+  if(occPct>=t2){peakCls='peak-red';peakEmoji='🔴';}
+  else if(occPct>=t1){peakCls='peak-yellow';peakEmoji='🟡';}
+
   document.getElementById('stats-row').innerHTML=`
     <div class="stat-pill"><div class="stat-icon">🏕️</div><div><div class="stat-num">${v.length}</div><div class="stat-lbl">Cabanas</div></div></div>
     <div class="stat-pill"><div class="stat-icon">✅</div><div><div class="stat-num" style="color:var(--mint)">${ci}</div><div class="stat-lbl">In/Paid</div></div></div>
     <div class="stat-pill"><div class="stat-icon">🔶</div><div><div class="stat-num" style="color:#d97706">${res}</div><div class="stat-lbl">Reserved</div></div></div>
     <div class="stat-pill"><div class="stat-icon">👥</div><div><div class="stat-num" style="color:var(--ocean)">${cabHC}</div><div class="stat-lbl">Cab Guests</div></div></div>
+    <div class="stat-pill"><div><div class="stat-lbl" style="margin-bottom:3px;">Occupancy</div><div><span class="peak-pill ${peakCls}">${peakEmoji} ${occPct}%</span></div></div></div>
     <div class="stat-pill" style="min-width:160px;cursor:default;">
       <div class="stat-icon">🌊</div>
       <div style="flex:1">
@@ -1193,7 +1638,9 @@ function saveParkCount(val){lss(`cb_parkcount_${currentDate}_${currentSession}`,
 function adjustParkCount(d){
   const k=`cb_parkcount_${currentDate}_${currentSession}`;
   const n=Math.max(0,(parseInt(ls(k)||'0'))+d);
-  lss(k,n);renderStats(getCabanas());
+  lss(k,n);
+  renderStats(getCabanas());
+  if(document.getElementById('headcount-view').classList.contains('active')) renderHeadcount();
 }
 
 function renderServerChips(){
@@ -1226,10 +1673,30 @@ function renderWorkload(cabs){
       <div class="workload-nums">${assigned.length} cabana${assigned.length!==1?'s':''} · ${guests} guests</div>
     </div>`;
   }).join('');
+
+  // Server performance quick stats
+  const statsWrap=document.getElementById('srv-stats-wrap');
+  const statsGrid=document.getElementById('srv-stats-grid');
+  if(statsWrap&&statsGrid){
+    statsWrap.style.display=managerSettings.showServerStats&&servers.length?'block':'none';
+    if(managerSettings.showServerStats){
+      statsGrid.innerHTML=servers.map(s=>{
+        const assigned=Object.values(cabs).filter(c=>c.server===s.name&&c.status!=='available');
+        const guests=assigned.reduce((t,c)=>t+(+c.count||0),0);
+        return `<div class="srv-stat-card">
+          <div class="srv-stat-name"><div class="wd" style="background:${s.color};width:8px;height:8px;border-radius:50%;flex-shrink:0"></div>${s.name}</div>
+          <div class="srv-stat-row"><span>Cabanas</span><span class="srv-stat-val">${assigned.length}</span></div>
+          <div class="srv-stat-row"><span>Guests</span><span class="srv-stat-val">${guests}</span></div>
+        </div>`;
+      }).join('');
+    }
+  }
 }
 
 function renderPriceGrid(){
-  document.getElementById('price-grid').innerHTML=SECTIONS.map(sec=>
+  const el=document.getElementById('price-grid');
+  if(!el) return;
+  el.innerHTML=SECTIONS.map(sec=>
     `<div class="price-row">
       <label>${sec.label.replace(/\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu,'').trim()}</label>
       <div class="price-wrap"><span>$</span>
@@ -1239,6 +1706,37 @@ function renderPriceGrid(){
       <div style="font-size:.6rem;color:var(--sub);margin-top:1px;">${sec.cap}</div>
     </div>`
   ).join('');
+}
+
+function renderTicketPriceGrid(){
+  const el=document.getElementById('ticket-price-grid');
+  if(!el) return;
+  const tp=managerSettings.ticketPrices;
+  el.innerHTML=`
+    <div class="tp-row"><label>Over 48"</label><div class="tp-wrap"><span>$</span><input type="number" min="0" step=".50" value="${tp.over48||''}" oninput="managerSettings.ticketPrices.over48=+this.value;saveManagerSettings()"></div></div>
+    <div class="tp-row"><label>Under 48"</label><div class="tp-wrap"><span>$</span><input type="number" min="0" step=".50" value="${tp.under48||''}" oninput="managerSettings.ticketPrices.under48=+this.value;saveManagerSettings()"></div></div>
+    <div class="tp-row"><label>Senior</label><div class="tp-wrap"><span>$</span><input type="number" min="0" step=".50" value="${tp.senior||''}" oninput="managerSettings.ticketPrices.senior=+this.value;saveManagerSettings()"></div></div>
+    <div class="tp-row"><label>Spectator</label><div class="tp-wrap"><span>$</span><input type="number" min="0" step=".50" value="${tp.spectator||''}" oninput="managerSettings.ticketPrices.spectator=+this.value;saveManagerSettings()"></div></div>`;
+}
+
+function renderManagerSettingsUI(){
+  const t1El=document.getElementById('thresh-first');
+  const t2El=document.getElementById('thresh-second');
+  const ssEl=document.getElementById('setting-show-srv-stats');
+  if(t1El) t1El.value=managerSettings.peakThresholds.first;
+  if(t2El) t2El.value=managerSettings.peakThresholds.second;
+  if(ssEl) ssEl.checked=!!managerSettings.showServerStats;
+  renderTicketPriceGrid();
+}
+
+function toggleMgrSettings(){
+  const body=document.getElementById('mgr-settings-body');
+  const arrow=document.getElementById('mgr-settings-arrow');
+  if(!body||!arrow) return;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arrow.classList.toggle('open',!isOpen);
+  if(!isOpen){renderPriceGrid();renderManagerSettingsUI();}
 }
 
 function renderSections(cabs){
@@ -1303,6 +1801,15 @@ function buildManagerCard(c,sec){
   const showDup=c.status!=='available';
   const timeTag=c.checkedInTime?`<span class="tag tag-time">🕐 ${c.checkedInTime}</span>`:'';
   const photoTag=(c.photos||[]).length?`<span class="tag tag-photo">📷 ${c.photos.length}</span>`:'';
+  const lateArr=c.lateArrivals||[];
+  const lateArrived=lateArr.filter(la=>la.arrivedAt).length;
+  const latePending=lateArr.filter(la=>!la.arrivedAt).length;
+  const lateTag=lateArr.length?`<span class="tag tag-late">⏳ ${lateArrived}/${lateArr.length} arrived</span>`:'';
+  const reqTag=c.serverRequested?`<span class="tag tag-req">🔒 Requested</span>`:'';
+  const wbTag=buildWBTagHtml(c);
+  const bookTypeTag=(c.status==='checkedin'||c.status==='paid'||c.status==='reserved')
+    ?(c.walkIn?`<span class="tag tag-walkin">🚶 Walk-In</span>`:`<span class="tag tag-reservation">📅 Reservation</span>`)
+    :'';
 
   const inner=`
     <div class="cab-top">
@@ -1312,8 +1819,9 @@ function buildManagerCard(c,sec){
     <div class="cab-group${c.group?'':' no-grp'}">${c.group?'👥 '+c.group:'No group assigned'}</div>
     <div class="cab-tags">
       ${c.server&&clr?`<span class="tag tag-server" style="background:${clr};font-size:.68rem;padding:2px 7px">● ${c.server}</span>`:''}
+      ${reqTag}${bookTypeTag}${wbTag}
       ${c.count?`<span class="tag tag-cap">👥 ${c.count}</span>`:''}
-      ${timeTag}${photoTag}
+      ${timeTag}${photoTag}${lateTag}
       ${c.seasonPass?`<span class="tag tag-sp">🌟 SP</span>`:''}
       ${c.allDay?`<span class="tag tag-allday">All Day</span>`:''}
       ${c.eventType?`<span class="tag tag-event">${c.eventType}</span>`:''}
@@ -1455,6 +1963,42 @@ function renderKitchen(cabs){
   if(!cabs) cabs=getCabanas();
   const d=new Date(currentDate+'T12:00:00');
   document.getElementById('kitchen-subtitle').textContent=`${currentSession==='AM'?'☀️ Morning':'🌅 Afternoon'} · ${d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}`;
+
+  // Guest summary bar
+  const v=Object.values(cabs);
+  const ciCount=v.filter(c=>c.status==='checkedin'||c.status==='paid').length;
+  const resCount=v.filter(c=>c.status==='reserved').length;
+  const ciGuests=v.filter(c=>c.status==='checkedin'||c.status==='paid').reduce((s,c)=>s+(+c.count||0),0);
+  const resGuests=v.filter(c=>c.status==='reserved').reduce((s,c)=>s+(+c.count||0),0);
+  const parkCount=parseInt(ls(`cb_parkcount_${currentDate}_${currentSession}`)||'0');
+  document.getElementById('k-summary-bar').innerHTML=`
+    <div class="k-sum-pill"><div class="k-sum-num" style="color:#06d6a0">${ciCount}</div><div class="k-sum-lbl">Checked In</div></div>
+    <div class="k-sum-pill"><div class="k-sum-num" style="color:#fbbf24">${resCount}</div><div class="k-sum-lbl">Reserved</div></div>
+    <div class="k-sum-pill"><div class="k-sum-num" style="color:#06d6a0">${ciGuests}</div><div class="k-sum-lbl">Cab Guests In</div></div>
+    <div class="k-sum-pill"><div class="k-sum-num" style="color:#fbbf24">${resGuests}</div><div class="k-sum-lbl">Expected Guests</div></div>
+    <div class="k-sum-pill"><div class="k-sum-num" style="color:var(--sky,#48cae4)">${parkCount}</div><div class="k-sum-lbl">Park Count</div></div>`;
+
+  // Allergy panel
+  const allergyGroups=[];
+  v.forEach(c=>{
+    if(c.hasAllergy&&(c.allergies||[]).length&&c.status!=='available'){
+      const allergyList=c.allergies.map(a=>a.replace(/[^\w\s&\/\-]/gu,'')).join(', ');
+      allergyGroups.push({label:c.label,group:c.group,allergies:allergyList});
+    }
+  });
+  const allergyPanel=document.getElementById('k-allergy-panel');
+  const allergyList=document.getElementById('k-allergy-list');
+  if(allergyGroups.length){
+    allergyPanel.style.display='block';
+    allergyList.innerHTML=allergyGroups.map(ag=>`<div class="k-allergy-chip">⚠️ ${ag.label}${ag.group?' ('+ag.group+')':''}: <strong>${ag.allergies}</strong></div>`).join('');
+  } else {
+    allergyPanel.style.display='none';
+  }
+
+  // Update help/orders button UI
+  updateHelpUI();updateOrdersUI();
+
+  // Kitchen cards
   const container=document.getElementById('kitchen-container');container.innerHTML='';
   SECTIONS.forEach(sec=>{
     const secCabs=sec.isNoArea?Object.values(cabs).filter(c=>c.section==='noarea'):
@@ -1466,10 +2010,16 @@ function renderKitchen(cabs){
       const allergyList=(c.allergies||[]).map(a=>a.replace(/[^\w\s&\/\-]/gu,'')).join(', ');
       const spMap={available:'k-sp-available',reserved:'k-sp-reserved',checkedin:'k-sp-checkedin',paid:'k-sp-paid'};
       const sbMap={available:'Available',reserved:'Reserved',checkedin:'Checked In',paid:'Paid'};
+      const lateArr=c.lateArrivals||[];
+      const lateHtml=lateArr.length?`<div class="k-row" style="flex-wrap:wrap;gap:3px;margin-top:2px">
+        ${lateArr.map(la=>`<span class="k-badge" style="background:rgba(${la.arrivedAt?'6,214,160':'245,158,11'},.12);color:${la.arrivedAt?'#6ee7b7':'#fbbf24'};border:1px solid rgba(${la.arrivedAt?'6,214,160':'245,158,11'},.3)">
+          ${la.arrivedAt?'✅':'⏳'} ${la.name} (${la.ticketType})${la.arrivedAt?' · '+la.arrivedAt:''}
+        </span>`).join('')}
+      </div>`:'' ;
       return `<div class="k-card s-${c.status}">
         ${clr?`<div class="k-card-srv-band" style="background:${clr}"></div>`:''}
         <div class="k-row" style="margin-bottom:3px">
-          <div class="k-name">${c.label}</div>
+          <div class="k-name">${c.label}${c.serverRequested?` <span style="font-size:.6rem;color:#d8b4fe;font-weight:800">🔒</span>`:''}</div>
           <span class="k-status-pill ${spMap[c.status]||''}">${sbMap[c.status]||''}</span>
         </div>
         <div class="k-group${c.group?'':' empty'}">${c.group||'No group name'}</div>
@@ -1485,6 +2035,8 @@ function renderKitchen(cabs){
           ${c.cupcakes?`<span class="k-badge k-badge-cake">🧁 Cupcakes</span>`:''}
         </div>`:''}
         ${c.hasAllergy?`<div class="k-row"><span class="k-badge k-badge-allergy">⚠️ ALLERGY: ${allergyList||'See staff'}</span></div>`:''}
+        ${buildWBBadgeHtmlKitchen(c)}
+        ${lateHtml}
       </div>`;
     }).join('');
     container.innerHTML+=`<div class="kitchen-section"><div class="kitchen-section-title">${sec.label}</div><div class="kitchen-grid">${cards}</div></div>`;
@@ -1538,6 +2090,10 @@ function renderTV(cabs){
           ${c.server&&clr?`<div style="margin-top:2px"><span class="tv-srv-badge" style="background:${clr}22;color:${clr};border:1px solid ${clr}44">● ${c.server}</span></div>`:''}
           <div class="tv-tags" style="margin-top:3px">
             ${c.checkedInTime?`<span class="tv-tag tv-tag-time">🕐 ${c.checkedInTime}</span>`:''}
+            ${(c.status==='checkedin'||c.status==='paid'||c.status==='reserved')
+              ?(c.walkIn?`<span class="tv-tag tv-tag-walkin">🚶 Walk-In</span>`:`<span class="tv-tag tv-tag-reservation">📅 Res</span>`)
+              :''}
+            ${buildWBTagHtmlTV(c)}
             ${c.seasonPass?`<span class="tv-tag tv-tag-sp">🌟 SP</span>`:''}
             ${c.allDay?`<span class="tv-tag tv-tag-allday">All Day</span>`:''}
             ${(c.cake||c.cupcakes)?`<span class="tv-tag tv-tag-cake">${c.cake?'🎂':''}${c.cupcakes?'🧁':''}</span>`:''}
@@ -1551,6 +2107,11 @@ function renderTV(cabs){
   });
   document.getElementById('last-updated').textContent='Last updated: '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   if(weatherData){const b=document.getElementById('tv-weather-bar');if(b&&!b.innerHTML) b.innerHTML=`<span>${weatherData}</span><span style="opacity:.5">Draper, UT</span>`;}
+  // Help banner
+  const helpBanner=document.getElementById('tv-help-banner');
+  if(helpBanner) helpBanner.classList.toggle('active',helpNeeded);
+  // Hourly weather
+  if(hourlyWeatherData.length) renderHourlyWeather();
 }
 
 function toggleTVZoom(){
@@ -1602,6 +2163,17 @@ function openModal(id){
   document.getElementById('f-candles').checked=!!c.candles;
   document.getElementById('f-lighter').checked=!!c.lighter;
   document.getElementById('f-has-allergy').checked=!!c.hasAllergy;
+  document.getElementById('f-srv-requested').checked=!!c.serverRequested;
+  document.getElementById('f-walkin-type').checked=!!c.walkIn;
+  // Wristband
+  document.getElementById('f-has-wristband').checked=!!c.hasWristband;
+  updateWristbandUI();
+  document.querySelectorAll('.wb-color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.color===c.wristbandColor));
+  document.getElementById('wb-meal-section').style.display=c.wristbandColor==='meal-dessert'?'block':'none';
+  document.querySelectorAll('.wb-meal-btn').forEach(b=>b.classList.toggle('selected',b.dataset.meal===c.wristbandMealType));
+  // Late arrivals
+  modalLateArrivals=[...(c.lateArrivals||[])];
+  renderLateArrivalsModal();
   updateDessertUI();updateAllergyUI();
   const al=document.getElementById('f-allergy');
   const saved=c.allergies||[];
@@ -1639,9 +2211,205 @@ function removePhoto(i){modalPhotos.splice(i,1);renderPhotoThumbs();}
 
 function updateDessertUI(){document.getElementById('cake-extras').style.display=document.getElementById('f-cake').checked?'block':'none';}
 function updateAllergyUI(){document.getElementById('allergy-picker').style.display=document.getElementById('f-has-allergy').checked?'block':'none';}
-function setModalStatus(v){modalStatus=v;updateModalUI();}
+function updateWristbandUI(){
+  const has=document.getElementById('f-has-wristband').checked;
+  document.getElementById('wristband-picker').classList.toggle('open',has);
+}
+function selectWBColor(color){
+  document.querySelectorAll('.wb-color-btn').forEach(b=>b.classList.toggle('selected',b.dataset.color===color));
+  document.getElementById('wb-meal-section').style.display=color==='meal-dessert'?'block':'none';
+  if(color!=='meal-dessert') document.querySelectorAll('.wb-meal-btn').forEach(b=>b.classList.remove('selected'));
+}
+function selectWBMeal(type){
+  document.querySelectorAll('.wb-meal-btn').forEach(b=>b.classList.toggle('selected',b.dataset.meal===type));
+}
+function getModalWBColor(){
+  const btn=document.querySelector('.wb-color-btn.selected');return btn?btn.dataset.color:'';}
+function getModalWBMeal(){
+  const btn=document.querySelector('.wb-meal-btn.selected');return btn?btn.dataset.meal:'';}
+function buildWBDotHtml(color,size='sm'){
+  const wb=WB_COLORS[color];if(!wb) return '';
+  const isGrad=wb.css.startsWith('linear');
+  const style=isGrad?`background:${wb.css}`:`background:${wb.css};box-shadow:0 0 0 1px ${wb.border}`;
+  return `<span class="wb-dot-${size}" style="${style}"></span>`;
+}
+function buildWBTagHtml(c){
+  if(!c.hasWristband||!c.wristbandColor) return '';
+  const wb=WB_COLORS[c.wristbandColor];if(!wb) return '';
+  const label=c.wristbandColor==='meal-dessert'
+    ?(c.wristbandMealType==='meal'?'Meal WB':c.wristbandMealType==='dessert'?'Dessert WB':'Meal+Dessert WB')
+    :`${wb.label} WB`;
+  const isGrad=wb.css.startsWith('linear');
+  const dotStyle=isGrad?`background:${wb.css}`:`background:${wb.css};box-shadow:0 0 0 1.5px ${wb.border}`;
+  const tagBorder=isGrad?'#a855f7':wb.border;
+  const tagBg=isGrad?'rgba(168,85,247,.1)':`${wb.css}18`;
+  const tagColor=c.wristbandColor==='white'?'#374151':(isGrad?'#c084fc':wb.border);
+  return `<span class="tag tag-wb" style="border-color:${tagBorder};background:${tagBg};color:${tagColor}">${buildWBDotHtml(c.wristbandColor,'sm')} ${label}</span>`;
+}
+function buildWBTagHtmlTV(c){
+  if(!c.hasWristband||!c.wristbandColor) return '';
+  const wb=WB_COLORS[c.wristbandColor];if(!wb) return '';
+  const isGrad=wb.css.startsWith('linear');
+  const dotStyle=isGrad?`background:${wb.css}`:`background:${wb.css};box-shadow:0 0 0 1px ${wb.border}`;
+  const lbl=c.wristbandColor==='meal-dessert'
+    ?(c.wristbandMealType==='meal'?'Meal WB':c.wristbandMealType==='dessert'?'Dsrt WB':'Meal+Dsrt WB')
+    :`${wb.label} WB`;
+  return `<span class="tv-tag tv-tag-wb"><span style="${dotStyle};width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;margin-right:2px"></span>${lbl}</span>`;
+}
+function buildWBBadgeHtmlKitchen(c){
+  if(!c.hasWristband||!c.wristbandColor) return '';
+  const wb=WB_COLORS[c.wristbandColor];if(!wb) return '';
+  const isGrad=wb.css.startsWith('linear');
+  const dotStyle=isGrad?`background:${wb.css}`:`background:${wb.css};box-shadow:0 0 0 1.5px ${wb.border}`;
+  const lbl=c.wristbandColor==='meal-dessert'
+    ?(c.wristbandMealType==='meal'?'Meal Wristband':c.wristbandMealType==='dessert'?'Dessert Wristband':'Meal+Dessert Wristband')
+    :`${wb.label} Wristband`;
+  return `<div class="k-row"><span class="k-badge k-badge-wb"><span class="wb-dot-k" style="${dotStyle}"></span> 🪬 ${lbl}</span></div>`;
+}
 function updateModalUI(){['available','reserved','checkedin','paid'].forEach(v=>document.getElementById(`stog-${v}`).classList.toggle('sel',v===modalStatus));}
 function closeModal(){document.getElementById('overlay').classList.remove('open');modalId=null;}
+
+// ═══════════════════════════════════════
+// LATE ARRIVALS
+// ═══════════════════════════════════════
+function renderLateArrivalsModal(){
+  const list=document.getElementById('late-arrivals-list');
+  if(!list) return;
+  if(!modalLateArrivals.length){list.innerHTML='<div style="font-size:.72rem;color:var(--sub);font-style:italic;padding:2px 0 4px;">No late arrivals added yet</div>';return;}
+  list.innerHTML=modalLateArrivals.map((la,i)=>`
+    <div class="late-arr-item${la.arrivedAt?' arrived':''}">
+      <span class="late-arr-name">${la.name}</span>
+      <span class="late-arr-type">${la.ticketType}</span>
+      ${la.arrivedAt?`<span class="late-arr-ts">✅ ${la.arrivedAt}</span>`:
+        `<button class="btn-mark-arrived" onclick="markLateArrived(${i})">Mark Arrived</button>`}
+      <button class="btn-rm-late" onclick="removeLateArrival(${i})">×</button>
+    </div>`).join('');
+}
+function addLateArrival(){
+  const nameEl=document.getElementById('late-name-input');
+  const typeEl=document.getElementById('late-type-input');
+  const name=nameEl?.value.trim();
+  if(!name) return;
+  modalLateArrivals.push({name,ticketType:typeEl.value,arrivedAt:null});
+  nameEl.value='';
+  renderLateArrivalsModal();
+}
+function removeLateArrival(i){modalLateArrivals.splice(i,1);renderLateArrivalsModal();}
+function markLateArrived(i){
+  if(!modalLateArrivals[i]) return;
+  modalLateArrivals[i].arrivedAt=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  renderLateArrivalsModal();
+}
+
+// ═══════════════════════════════════════
+// HELP NEEDED / ORDERS TOGGLES
+// ═══════════════════════════════════════
+function toggleKitchenHelp(){
+  helpNeeded=!helpNeeded;
+  saveSharedState();
+  updateHelpUI();
+}
+function toggleBreakroomOrders(){
+  ordersOn=!ordersOn;
+  saveSharedState();
+  updateOrdersUI();
+}
+function updateHelpUI(){
+  const kBtn=document.getElementById('k-help-btn');
+  if(kBtn){kBtn.className=`k-help-btn ${helpNeeded?'on':'off'}`;kBtn.textContent=helpNeeded?'🚨 Help Active':'🚨 Help Needed';}
+  const tvBanner=document.getElementById('tv-help-banner');
+  if(tvBanner) tvBanner.classList.toggle('active',helpNeeded);
+  const brFlash=document.getElementById('br-help-flash');
+  if(brFlash) brFlash.classList.toggle('active',helpNeeded);
+}
+function updateOrdersUI(){
+  const kBtn=document.getElementById('k-orders-btn');
+  if(kBtn){kBtn.className=`k-orders-btn ${ordersOn?'on':'off'}`;kBtn.textContent=ordersOn?'🍕 Orders: ON':'🍕 Orders: OFF';}
+  const ind=document.getElementById('br-indicator');
+  const icon=document.getElementById('br-status-icon');
+  const txt=document.getElementById('br-status-text');
+  const sub=document.getElementById('br-status-sub');
+  if(ind){
+    ind.className=`br-indicator ${ordersOn?'orders-on':'orders-off'}`;
+    if(icon) icon.textContent=ordersOn?'✅':'🚫';
+    if(txt) txt.textContent=ordersOn?'ORDERS OPEN':'ORDERS CLOSED';
+    if(sub) sub.textContent=ordersOn?'Kitchen is accepting employee orders':'Kitchen cannot take orders right now';
+  }
+}
+
+// ═══════════════════════════════════════
+// PAGE-SPECIFIC DARK/LIGHT MODES
+// ═══════════════════════════════════════
+function toggleKitchenDark(){
+  kitchenDark=!kitchenDark;
+  const kv=document.getElementById('kitchen-view');
+  if(kv) kv.classList.toggle('k-light',!kitchenDark);
+  const btn=kv?.querySelector('.k-page-toggle');
+  if(btn) btn.textContent=kitchenDark?'☀️':'🌙';
+  lss('cb_kitchen_dark',kitchenDark?'1':'0');
+}
+function toggleBreakroomDark(){
+  breakroomDark=!breakroomDark;
+  const bv=document.getElementById('breakroom-view');
+  if(bv){bv.classList.toggle('br-dark',breakroomDark);bv.classList.toggle('br-light',!breakroomDark);}
+  const btn=bv?.querySelector('.br-page-btn');
+  if(btn) btn.textContent=breakroomDark?'☀️':'🌙';
+  lss('cb_breakroom_dark',breakroomDark?'1':'0');
+}
+function toggleHeadcountDark(){
+  headcountDark=!headcountDark;
+  const hv=document.getElementById('headcount-view');
+  if(hv) hv.classList.toggle('hc-light',!headcountDark);
+  const btn=hv?.querySelector('.hc-page-btn');
+  if(btn) btn.textContent=headcountDark?'☀️':'🌙';
+  lss('cb_headcount_dark',headcountDark?'1':'0');
+}
+
+// ═══════════════════════════════════════
+// HEADCOUNT PAGE
+// ═══════════════════════════════════════
+function hcAdjust(d){
+  const k=`cb_parkcount_${currentDate}_${currentSession}`;
+  const n=Math.max(0,(parseInt(ls(k)||'0'))+d);
+  lss(k,n);
+  renderHeadcount();
+  renderStats(getCabanas());
+}
+function hcReset(){
+  if(!confirm('Reset park headcount to 0?')) return;
+  const k=`cb_parkcount_${currentDate}_${currentSession}`;
+  lss(k,0);renderHeadcount();renderStats(getCabanas());
+}
+function renderHeadcount(){
+  const k=`cb_parkcount_${currentDate}_${currentSession}`;
+  const n=parseInt(ls(k)||'0');
+  const el=document.getElementById('hc-display');
+  if(el){
+    el.textContent=n;
+    el.classList.add('bump');
+    setTimeout(()=>el.classList.remove('bump'),150);
+  }
+  // Sub title
+  const d=new Date(currentDate+'T12:00:00');
+  const sub=document.getElementById('hc-subtitle');
+  if(sub) sub.textContent=`${currentSession==='AM'?'☀️ Morning':'🌅 Afternoon'} · ${d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}`;
+  // Stats
+  const cabs=getCabanas();const v=Object.values(cabs);
+  const cabGuests=v.filter(c=>c.status==='checkedin'||c.status==='paid').reduce((s,c)=>s+(+c.count||0),0);
+  const statsRow=document.getElementById('hc-stats-row');
+  if(statsRow) statsRow.innerHTML=`
+    <div class="hc-stat"><div class="hc-stat-num">${cabGuests}</div><div class="hc-stat-lbl">Cabana Guests</div></div>
+    <div class="hc-stat"><div class="hc-stat-num">${v.filter(c=>c.status==='checkedin'||c.status==='paid').length}</div><div class="hc-stat-lbl">Cabanas In</div></div>
+    <div class="hc-stat"><div class="hc-stat-num">${v.filter(c=>c.status==='reserved').length}</div><div class="hc-stat-lbl">Reserved</div></div>`;
+}
+
+// ═══════════════════════════════════════
+// BREAK ROOM PAGE
+// ═══════════════════════════════════════
+function renderBreakroom(){
+  updateOrdersUI();
+  updateHelpUI();
+}
 
 function modalAutoSave(){
   if(!modalId) return;
@@ -1682,6 +2450,12 @@ function saveModal(){
     allergies,
     tickets:{over48:+document.getElementById('tk-over48').value||0,under48:+document.getElementById('tk-under48').value||0,senior:+document.getElementById('tk-senior').value||0,spectator:+document.getElementById('tk-spectator').value||0},
     photos:modalPhotos,
+    serverRequested:document.getElementById('f-srv-requested').checked,
+    walkIn:document.getElementById('f-walkin-type').checked,
+    hasWristband:document.getElementById('f-has-wristband').checked,
+    wristbandColor:document.getElementById('f-has-wristband').checked?getModalWBColor():'',
+    wristbandMealType:document.getElementById('f-has-wristband').checked&&getModalWBColor()==='meal-dessert'?getModalWBMeal():'',
+    lateArrivals:modalLateArrivals,
     checkedInTime:(!wasCheckedIn&&nowCheckedIn)?new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):c.checkedInTime||'',
   });
   const linked=[...document.querySelectorAll('#link-options .link-chip.linked')];
@@ -1868,10 +2642,12 @@ function renderDayDetail(dateStr){
 function switchView(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
   document.getElementById(`${v}-view`).classList.add('active');
-  ['manager','kitchen','tv','reports'].forEach(t=>{const el=document.getElementById(`tab-${t}`);if(el)el.classList.toggle('active',t===v);});
-  if(v==='tv') renderTV();
-  if(v==='kitchen') renderKitchen();
-  if(v==='reports') renderReports();
+  ['manager','kitchen','tv','headcount','breakroom','reports'].forEach(t=>{const el=document.getElementById(`tab-${t}`);if(el)el.classList.toggle('active',t===v);});
+  if(v==='tv'){renderTV();}
+  if(v==='kitchen'){renderKitchen();}
+  if(v==='reports'){renderReports();}
+  if(v==='headcount'){renderHeadcount();}
+  if(v==='breakroom'){renderBreakroom();}
 }
 document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
@@ -1887,9 +2663,18 @@ setInterval(()=>{if(document.getElementById('tv-view').classList.contains('activ
 // INIT
 // ═══════════════════════════════════════
 servers=loadServers();prices=loadPrices();customLabels=loadCustomLabels();
+managerSettings=loadManagerSettings();
+loadSharedState();
 const savedTheme=ls('cb_theme')||'light';
 document.documentElement.setAttribute('data-theme',savedTheme);
 document.getElementById('theme-btn').textContent=savedTheme==='dark'?'☀️':'🌙';
+// Restore page-specific dark modes
+kitchenDark=ls('cb_kitchen_dark')==='1';
+breakroomDark=(ls('cb_breakroom_dark')||'1')==='1'; // default dark for break room
+headcountDark=ls('cb_headcount_dark')==='1';
+if(!kitchenDark){const kv=document.getElementById('kitchen-view');if(kv)kv.classList.add('k-light');}
+if(!breakroomDark){const bv=document.getElementById('breakroom-view');if(bv){bv.classList.remove('br-dark');bv.classList.add('br-light');}}
+if(!headcountDark){const hv=document.getElementById('headcount-view');if(hv)hv.classList.add('hc-light');}
 updateDateLabel();loadShiftNotes();render();
 fetchWeather();
 initSupabase();
