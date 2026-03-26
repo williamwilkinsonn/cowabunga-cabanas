@@ -654,14 +654,56 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 #kitchen-view.k-light .k-allergy-panel{background:#fef2f2;border-color:#fecaca;}
 #kitchen-view.k-light .k-allergy-title{color:#991b1b;}
 #kitchen-view.k-light .k-allergy-chip{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
-/* Help flash on TV */
-.tv-help-banner{background:rgba(239,71,111,.22);border:2px solid #ef476f;border-radius:11px;padding:10px 16px;text-align:center;display:none;margin-bottom:10px;animation:helpFlash 1s ease-in-out infinite;}
+/* Help flash on TV — per-alert banners */
+.tv-help-banners{margin-bottom:10px;}
+.tv-help-banner{background:rgba(239,71,111,.22);border:2px solid #ef476f;border-radius:11px;padding:10px 16px;text-align:center;display:none;margin-bottom:6px;animation:helpFlash 1s ease-in-out infinite;}
 .tv-help-banner.active{display:block;}
 .tv-help-text{font-family:'Boogaloo',cursive;font-size:1.3rem;color:#ff6b8a;letter-spacing:1px;}
+.tv-607-banner{background:rgba(120,53,15,.55);border:2px solid #f97316;border-radius:11px;padding:10px 16px;text-align:center;display:none;margin-bottom:6px;animation:helpFlash 1s ease-in-out infinite;}
+.tv-607-banner.active{display:block;}
+.tv-607-text{font-family:'Boogaloo',cursive;font-size:1.3rem;color:#fed7aa;letter-spacing:1px;}
 /* Kitchen hourly weather in light mode */
 #kitchen-view.k-light .hw-item{background:rgba(0,119,182,.07);border-color:rgba(0,119,182,.15);}
 #kitchen-view.k-light .hw-time{color:var(--sub);}
 #kitchen-view.k-light .hw-temp{color:var(--text);}
+/* ═══════════════════════ KITCHEN HELP ITEMS ═══════════════════════ */
+.k-help-items{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.k-help-item-btn{padding:7px 14px;border-radius:9px;border:2px solid;font-family:'Nunito',sans-serif;font-weight:800;font-size:.74rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.k-help-item-btn.off{border-color:#94a3b8;color:#94a3b8;background:rgba(148,163,184,.1);}
+.k-help-item-btn.on{border-color:#ef476f;background:#ef476f;color:white;animation:helpPulse .9s ease-in-out infinite;}
+#kitchen-view.k-light .k-help-item-btn.off{border-color:#64748b;color:#64748b;background:rgba(100,116,139,.07);}
+/* ═══════════════════════ MANAGER KITCHEN ALERTS PANEL ═══════════════════════ */
+.mgr-alerts-panel{background:var(--panel-bg);border-radius:14px;padding:11px 13px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.07);display:none;}
+.mgr-alerts-panel.has-alerts{display:block;}
+.mgr-alerts-title{font-family:'Boogaloo',cursive;font-size:1rem;color:#ef476f;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.mgr-alert-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.mgr-alert-chip{padding:4px 10px;border-radius:8px;font-size:.72rem;font-weight:800;border:1.5px solid;display:flex;align-items:center;gap:4px;}
+.mgr-alert-chip-help{background:#fde8ea;color:#c0392b;border-color:#f9a8d4;animation:helpFlash 1.5s ease-in-out infinite;}
+.mgr-alert-chip-607{background:#fff7ed;color:#c2410c;border-color:#fed7aa;animation:helpFlash 1.5s ease-in-out infinite;}
+/* ═══════════════════════ 607 INDICATOR (MANAGER) ═══════════════════════ */
+.mgr-607-wrap{margin-top:10px;padding:10px 12px;background:var(--dim);border-radius:10px;border:1.5px solid var(--border);}
+.mgr-607-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+.mgr-607-label{font-weight:800;font-size:.78rem;color:var(--text);}
+.mgr-607-loc-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.mgr-607-loc-label{font-size:.68rem;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.3px;}
+.mgr-607-loc-select{padding:4px 8px;border:2px solid var(--border);border-radius:7px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;color:var(--text);background:var(--input-bg);}
+.mgr-607-loc-select:focus{outline:none;border-color:var(--sky);}
+/* ═══════════════════════ LIGHTNING BANNER ═══════════════════════ */
+.lightning-banner{display:none;position:sticky;top:54px;z-index:290;background:linear-gradient(90deg,#1e3a5f,#1e40af,#1e3a5f);border-bottom:3px solid #60a5fa;padding:8px 16px;text-align:center;animation:lightningFlash 2s ease-in-out infinite;}
+.lightning-banner.active{display:block;}
+.lightning-banner-text{font-family:'Boogaloo',cursive;font-size:1.1rem;color:#93c5fd;letter-spacing:1.5px;}
+@keyframes lightningFlash{0%,100%{background:linear-gradient(90deg,#1e3a5f,#1e40af,#1e3a5f);box-shadow:none}50%{background:linear-gradient(90deg,#1e40af,#3b82f6,#1e40af);box-shadow:0 0 20px rgba(59,130,246,.4)}}
+/* ═══════════════════════ BREAK ROOM HELP ALERTS ═══════════════════════ */
+.br-help-alerts{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:20px;width:100%;max-width:700px;padding:0 16px;}
+.br-help-alert{border-radius:20px;padding:22px 40px;text-align:center;display:none;width:100%;}
+.br-help-alert.active{display:block;animation:helpFlash 1.2s ease-in-out infinite;}
+.br-help-alert-text{font-family:'Boogaloo',cursive;font-size:clamp(1.4rem,4vw,2.2rem);color:white;letter-spacing:1.5px;}
+.br-help-alert-sub{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.75);margin-top:4px;}
+.br-help-alert-kitchen{background:linear-gradient(135deg,#be123c,#ef476f);box-shadow:0 0 40px rgba(239,71,111,.4);}
+.br-help-alert-607{background:linear-gradient(135deg,#92400e,#f97316);box-shadow:0 0 40px rgba(249,115,22,.4);}
+/* Green capacity threshold */
+.peak-green-cfg{background:#dcfce7;color:#15803d;border:1.5px solid #86efac;}
+[data-theme="dark"] .peak-green-cfg{background:rgba(6,214,160,.15);color:#6ee7b7;border-color:rgba(6,214,160,.3);}
 </style>
 </head>
 <body>
@@ -705,12 +747,12 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
   <div class="topbar-right">
     <div class="view-tabs">
-      <button class="view-tab active" id="tab-manager"   onclick="switchView('manager')">📋 Mgr</button>
-      <button class="view-tab"        id="tab-kitchen"   onclick="switchView('kitchen')">👨‍🍳 Kit</button>
-      <button class="view-tab"        id="tab-tv"        onclick="switchView('tv')">📺 TV</button>
-      <button class="view-tab"        id="tab-headcount" onclick="switchView('headcount')">🌊 HC</button>
-      <button class="view-tab"        id="tab-breakroom" onclick="switchView('breakroom')">🍕 BR</button>
-      <button class="view-tab"        id="tab-reports"   onclick="switchView('reports')">📊 Rpts</button>
+      <button class="view-tab active" id="tab-manager"   onclick="switchView('manager')">📋 Manager</button>
+      <button class="view-tab"        id="tab-kitchen"   onclick="switchView('kitchen')">👨‍🍳 Kitchen</button>
+      <button class="view-tab"        id="tab-tv"        onclick="switchView('tv')">📺 Television Display</button>
+      <button class="view-tab"        id="tab-headcount" onclick="switchView('headcount')">👥 Headcount</button>
+      <button class="view-tab"        id="tab-breakroom" onclick="switchView('breakroom')">🍕 Break Room Orders</button>
+      <button class="view-tab"        id="tab-reports"   onclick="switchView('reports')">📊 Reports &amp; Analytics</button>
     </div>
     <button class="icon-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light mode">🌙</button>
     <button class="icon-btn" onclick="undoLast()" id="undo-btn" title="Undo last clear" style="opacity:.4">↩️</button>
@@ -720,6 +762,17 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
 <!-- ═══════════════ MANAGER VIEW ═══════════════ -->
 <div id="manager-view" class="view active">
+
+  <!-- Lightning Banner -->
+  <div class="lightning-banner" id="mgr-lightning-banner">
+    <div class="lightning-banner-text">⚡ LIGHTNING IN FORECAST — MONITOR CONDITIONS CLOSELY ⚡</div>
+  </div>
+
+  <!-- Kitchen Alerts Panel -->
+  <div class="mgr-alerts-panel" id="mgr-alerts-panel">
+    <div class="mgr-alerts-title">🚨 Active Kitchen Alerts</div>
+    <div class="mgr-alert-chips" id="mgr-alert-chips"></div>
+  </div>
 
   <!-- Toolbar -->
   <div class="mgr-toolbar">
@@ -746,8 +799,13 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
       </div>
       <!-- Peak Thresholds -->
       <div class="settings-section">
-        <div class="settings-section-title">📊 Peak Time Thresholds (Occupancy %)</div>
+        <div class="settings-section-title">📊 Park Capacity Thresholds (Occupancy %)</div>
         <div class="threshold-row">
+          <div class="threshold-item">
+            <label>🟢 Green at</label>
+            <input type="number" id="thresh-green" min="1" max="99" placeholder="50" oninput="saveManagerSettings()">
+            <span style="font-size:.72rem;color:var(--sub);font-weight:700">%</span>
+          </div>
           <div class="threshold-item">
             <label>🟡 Yellow at</label>
             <input type="number" id="thresh-first" min="1" max="99" placeholder="70" oninput="saveManagerSettings()">
@@ -757,6 +815,24 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
             <label>🔴 Red at</label>
             <input type="number" id="thresh-second" min="1" max="100" placeholder="90" oninput="saveManagerSettings()">
             <span style="font-size:.72rem;color:var(--sub);font-weight:700">%</span>
+          </div>
+        </div>
+      </div>
+      <!-- 607 Indicator -->
+      <div class="settings-section">
+        <div class="settings-section-title">💩 607 Alert Indicator</div>
+        <div class="mgr-607-wrap">
+          <div class="mgr-607-hdr">
+            <div class="mgr-607-label">💩 607 Alert Active</div>
+            <label class="toggle"><input type="checkbox" id="setting-607-on" onchange="toggle607()"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="mgr-607-loc-row">
+            <span class="mgr-607-loc-label">Location:</span>
+            <select class="mgr-607-loc-select" id="setting-607-location" onchange="set607Location(this.value)">
+              <option value="Kids Cove">Kids Cove</option>
+              <option value="Lazy River / Beach">Lazy River / Beach</option>
+              <option value="Structure">Structure</option>
+            </select>
           </div>
         </div>
       </div>
@@ -828,10 +904,18 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
       <div class="kitchen-title">👨‍🍳 Kitchen Board</div>
       <div class="kitchen-subtitle" id="kitchen-subtitle">—</div>
     </div>
-    <div class="kitchen-ctrl-row">
-      <button class="k-help-btn off" id="k-help-btn" onclick="toggleKitchenHelp()">🚨 Help Needed</button>
-      <button class="k-orders-btn off" id="k-orders-btn" onclick="toggleBreakroomOrders()">🍕 Orders</button>
-      <button class="k-page-toggle" onclick="toggleKitchenDark()">🌙</button>
+    <div>
+      <div class="kitchen-ctrl-row">
+        <button class="k-orders-btn off" id="k-orders-btn" onclick="toggleBreakroomOrders()">🍕 Orders</button>
+        <button class="k-page-toggle" onclick="toggleKitchenDark()">🌙</button>
+      </div>
+      <div class="k-help-items" id="k-help-items">
+        <button class="k-help-item-btn off" id="k-help-pitchers"   onclick="toggleHelpItem('pitchers')">🫙 Pitchers</button>
+        <button class="k-help-item-btn off" id="k-help-pizzaTrays" onclick="toggleHelpItem('pizzaTrays')">🍕 Pizza Trays</button>
+        <button class="k-help-item-btn off" id="k-help-expediting" onclick="toggleHelpItem('expediting')">🚀 Expediting Help</button>
+        <button class="k-help-item-btn off" id="k-help-generalHelp" onclick="toggleHelpItem('generalHelp')">🙋 General Help</button>
+        <button class="k-help-item-btn off" id="k-help-dishes"     onclick="toggleHelpItem('dishes')">🍽 Dishes</button>
+      </div>
     </div>
   </div>
   <!-- Guest summary bar -->
@@ -850,14 +934,40 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
 <!-- ═══════════════ TV VIEW ═══════════════ -->
 <div id="tv-view" class="view">
+  <!-- Lightning Banner -->
+  <div class="lightning-banner" id="tv-lightning-banner">
+    <div class="lightning-banner-text">⚡ LIGHTNING IN FORECAST — POOL CLOSURE MAY BE REQUIRED ⚡</div>
+  </div>
   <div class="tv-controls">
     <button class="tv-ctrl-btn" id="tv-zoom-btn" onclick="toggleTVZoom()">🔍 Zoom</button>
     <button class="tv-ctrl-btn" id="tv-scroll-btn" onclick="toggleTVScroll()">▶ Auto-Scroll</button>
   </div>
-  <!-- Kitchen needs help banner -->
-  <div class="tv-help-banner" id="tv-help-banner">
-    <div class="tv-help-text">🚨 KITCHEN NEEDS HELP 🚨</div>
-    <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Check with kitchen staff</div>
+  <!-- Kitchen needs help banners (one per alert type) -->
+  <div class="tv-help-banners" id="tv-help-banners">
+    <div class="tv-help-banner" id="tv-help-pitchers">
+      <div class="tv-help-text">🫙 KITCHEN NEEDS PITCHERS 🫙</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Please bring pitchers to the kitchen</div>
+    </div>
+    <div class="tv-help-banner" id="tv-help-pizzaTrays">
+      <div class="tv-help-text">🍕 KITCHEN NEEDS PIZZA TRAYS 🍕</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Please locate and return pizza trays to kitchen</div>
+    </div>
+    <div class="tv-help-banner" id="tv-help-expediting">
+      <div class="tv-help-text">🚀 KITCHEN NEEDS EXPEDITING HELP 🚀</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Guest service: please assist with expediting / cashiering</div>
+    </div>
+    <div class="tv-help-banner" id="tv-help-generalHelp">
+      <div class="tv-help-text">🙋 KITCHEN NEEDS GENERAL HELP 🙋</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Please check in with kitchen staff</div>
+    </div>
+    <div class="tv-help-banner" id="tv-help-dishes">
+      <div class="tv-help-text">🍽 KITCHEN NEEDS DISHES 🍽</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:3px;">Please bring dishes back to kitchen</div>
+    </div>
+    <div class="tv-607-banner" id="tv-help-607">
+      <div class="tv-607-text" id="tv-607-text">💩 607 ALERT 💩</div>
+      <div style="font-size:.75rem;color:rgba(253,186,116,.8);font-weight:700;margin-top:3px;" id="tv-607-sub">Notify maintenance immediately</div>
+    </div>
   </div>
   <div class="tv-header">
     <div class="tv-title">🌊 Cowabunga Bay — Cabana Status</div>
@@ -939,7 +1049,33 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
     <div class="br-status-text" id="br-status-text">ORDERS CLOSED</div>
     <div class="br-status-sub" id="br-status-sub">Kitchen cannot take orders right now</div>
   </div>
-  <div class="br-help-flash" id="br-help-flash">🚨 KITCHEN NEEDS HELP — Please assist! 🚨</div>
+  <!-- Large individual help alerts -->
+  <div class="br-help-alerts" id="br-help-alerts">
+    <div class="br-help-alert br-help-alert-kitchen" id="br-alert-pitchers">
+      <div class="br-help-alert-text">🫙 KITCHEN NEEDS PITCHERS 🫙</div>
+      <div class="br-help-alert-sub">Please bring pitchers to the kitchen</div>
+    </div>
+    <div class="br-help-alert br-help-alert-kitchen" id="br-alert-pizzaTrays">
+      <div class="br-help-alert-text">🍕 KITCHEN NEEDS PIZZA TRAYS 🍕</div>
+      <div class="br-help-alert-sub">Please locate and return pizza trays</div>
+    </div>
+    <div class="br-help-alert br-help-alert-kitchen" id="br-alert-expediting">
+      <div class="br-help-alert-text">🚀 KITCHEN NEEDS EXPEDITING HELP 🚀</div>
+      <div class="br-help-alert-sub">Please assist with expediting / cashiering</div>
+    </div>
+    <div class="br-help-alert br-help-alert-kitchen" id="br-alert-generalHelp">
+      <div class="br-help-alert-text">🙋 KITCHEN NEEDS GENERAL HELP 🙋</div>
+      <div class="br-help-alert-sub">Please check in with kitchen staff</div>
+    </div>
+    <div class="br-help-alert br-help-alert-kitchen" id="br-alert-dishes">
+      <div class="br-help-alert-text">🍽 KITCHEN NEEDS DISHES 🍽</div>
+      <div class="br-help-alert-sub">Please bring dishes back to the kitchen</div>
+    </div>
+    <div class="br-help-alert br-help-alert-607" id="br-alert-607">
+      <div class="br-help-alert-text" id="br-alert-607-text">💩 607 ALERT 💩</div>
+      <div class="br-help-alert-sub" id="br-alert-607-sub">Notify maintenance immediately</div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════ MODAL ═══════════════ -->
@@ -1177,8 +1313,11 @@ let weatherData=null,hourlyWeatherData=[];
 let modalPhotos=[];
 let customLabels={};
 let helpNeeded=false,ordersOn=false;
+let helpItems={pitchers:false,pizzaTrays:false,expediting:false,generalHelp:false,dishes:false};
+let alert607={on:false,location:'Kids Cove'};
+let lightningActive=false;
 let kitchenDark=false,breakroomDark=false,headcountDark=false;
-let managerSettings={peakThresholds:{first:70,second:90},ticketPrices:{over48:25,under48:20,senior:15,spectator:10},showServerStats:false};
+let managerSettings={peakThresholds:{green:50,first:70,second:90},ticketPrices:{over48:25,under48:20,senior:15,spectator:10},showServerStats:false};
 let modalLateArrivals=[];
 
 // ═══════════════════════════════════════
@@ -1200,18 +1339,24 @@ function loadCustomLabels(){try{const r=ls('cb_labels');return r?JSON.parse(r):{
 function saveCustomLabels(){lss('cb_labels',JSON.stringify(customLabels));}
 function loadManagerSettings(){try{const r=ls('cb_mgrsettings');return r?{...managerSettings,...JSON.parse(r)}:managerSettings;}catch(e){return managerSettings;}}
 function saveManagerSettings(){
+  const tg=parseInt(document.getElementById('thresh-green')?.value)||managerSettings.peakThresholds.green;
   const t1=parseInt(document.getElementById('thresh-first')?.value)||managerSettings.peakThresholds.first;
   const t2=parseInt(document.getElementById('thresh-second')?.value)||managerSettings.peakThresholds.second;
   const ss=document.getElementById('setting-show-srv-stats')?.checked??managerSettings.showServerStats;
-  managerSettings.peakThresholds={first:t1,second:t2};
+  managerSettings.peakThresholds={green:tg,first:t1,second:t2};
   managerSettings.showServerStats=ss;
   lss('cb_mgrsettings',JSON.stringify(managerSettings));
   sbSyncKitchenState();
 }
 function loadSharedState(){
-  try{const r=ls('cb_shared_state');if(r){const d=JSON.parse(r);helpNeeded=!!d.helpNeeded;ordersOn=!!d.ordersOn;}}catch(e){}
+  try{const r=ls('cb_shared_state');if(r){const d=JSON.parse(r);helpNeeded=!!d.helpNeeded;ordersOn=!!d.ordersOn;if(d.helpItems)helpItems={...helpItems,...d.helpItems};if(d.alert607)alert607={...alert607,...d.alert607};}}catch(e){}
+  helpNeeded=Object.values(helpItems).some(Boolean);
 }
-function saveSharedState(){lss('cb_shared_state',JSON.stringify({helpNeeded,ordersOn}));sbSyncKitchenState();}
+function saveSharedState(){
+  helpNeeded=Object.values(helpItems).some(Boolean);
+  lss('cb_shared_state',JSON.stringify({helpNeeded,ordersOn,helpItems,alert607}));
+  sbSyncKitchenState();
+}
 async function sbSyncKitchenState(){
   if(!sb||!sbOnline) return;
   try{
@@ -1334,10 +1479,10 @@ async function sbInitialLoad(){
     }
     const {data:notesData}=await sb.from('shift_notes').select('*').eq('date',today);
     if(notesData&&notesData.length) notesData.forEach(r=>lss(`cb_shiftnotes_${today}_${r.session}`,r.notes||''));
-    try{
-      const {data:stateData}=await sb.from('app_state').select('*').eq('key','kitchen');
-      if(stateData&&stateData.length){const s=stateData[0];helpNeeded=!!s.helpNeeded;ordersOn=!!s.ordersOn;updateHelpUI();updateOrdersUI();}
-    }catch(e){}
+      try{
+        const {data:stateData}=await sb.from('app_state').select('*').eq('key','kitchen');
+        if(stateData&&stateData.length){const s=stateData[0];helpNeeded=!!s.helpNeeded;ordersOn=!!s.ordersOn;updateHelpUI();updateOrdersUI();}
+      }catch(e){}
     render();loadShiftNotes();
   }catch(e){console.warn('sbInitialLoad:',e);}
 }
@@ -1372,7 +1517,9 @@ function sbSetupRealtime(){
     .on('postgres_changes',{event:'*',schema:'public',table:'app_state'},async payload=>{
       const row=payload.new;if(!row) return;
       if(row.key==='kitchen'){
-        helpNeeded=!!row.helpNeeded;ordersOn=!!row.ordersOn;
+        ordersOn=!!row.ordersOn;
+        // helpNeeded from remote is a summary; local helpItems take precedence if set
+        if(!Object.values(helpItems).some(Boolean)) helpNeeded=!!row.helpNeeded;
         saveSharedState();updateHelpUI();updateOrdersUI();
       }
     })
@@ -1482,8 +1629,8 @@ async function fetchWeather(){
   const tvBar=document.getElementById('tv-weather-bar');
   chip.textContent='🌤 …';
   try{
-    // Draper UT lat/lon — fetch current + hourly
-    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.5246&longitude=-111.8638&current_weather=true&hourly=temperature_2m,weathercode&temperature_unit=fahrenheit&wind_speed_unit=mph&forecast_days=1&timezone=America%2FDenver');
+    // Draper UT lat/lon — fetch current + hourly (2 days to ensure 10 hours even late in day)
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.5246&longitude=-111.8638&current_weather=true&hourly=temperature_2m,weathercode&temperature_unit=fahrenheit&wind_speed_unit=mph&forecast_days=2&timezone=America%2FDenver');
     const d=await r.json();
     const cw=d.current_weather;
     const icon=weatherCodeIcon(cw.weathercode);
@@ -1491,16 +1638,20 @@ async function fetchWeather(){
     weatherData=txt;
     chip.textContent=txt;
 
-    // Build hourly data for today
+    // Build hourly data — up to 10 hours ahead
     hourlyWeatherData=[];
+    lightningActive=false;
     if(d.hourly&&d.hourly.time){
       const now=new Date();
       d.hourly.time.forEach((t,i)=>{
         const dt=new Date(t);
         if(dt<now-3600000) return; // skip past hours (allow 1hr back)
+        if(hourlyWeatherData.length>=10) return; // limit to 10 hours
+        const wcode=d.hourly.weathercode[i];
+        if(wcode>=95) lightningActive=true; // thunderstorm codes 95-99
         hourlyWeatherData.push({
           time:dt.toLocaleTimeString([],{hour:'numeric',hour12:true}),
-          icon:weatherCodeIcon(d.hourly.weathercode[i]),
+          icon:weatherCodeIcon(wcode),
           temp:Math.round(d.hourly.temperature_2m[i])
         });
       });
@@ -1511,7 +1662,16 @@ async function fetchWeather(){
 
     // Render hourly strips on all views
     renderHourlyWeather();
+    // Update lightning banners
+    updateLightningBanner();
   }catch(e){chip.textContent='🌤 —';}
+}
+
+function updateLightningBanner(){
+  const mgrBanner=document.getElementById('mgr-lightning-banner');
+  const tvBanner=document.getElementById('tv-lightning-banner');
+  if(mgrBanner) mgrBanner.classList.toggle('active',lightningActive);
+  if(tvBanner) tvBanner.classList.toggle('active',lightningActive);
 }
 
 function renderHourlyWeather(){
@@ -1608,11 +1768,13 @@ function renderStats(cabs){
   const totalCabs=v.filter(c=>c.section!=='noarea').length||1;
   const activeCabs=v.filter(c=>c.section!=='noarea'&&c.status!=='available').length;
   const occPct=Math.round((activeCabs/totalCabs)*100);
+  const tg=managerSettings.peakThresholds.green||50;
   const t1=managerSettings.peakThresholds.first||70;
   const t2=managerSettings.peakThresholds.second||90;
   let peakCls='peak-green',peakEmoji='🟢';
   if(occPct>=t2){peakCls='peak-red';peakEmoji='🔴';}
   else if(occPct>=t1){peakCls='peak-yellow';peakEmoji='🟡';}
+  else if(occPct<tg){peakCls='peak-green';peakEmoji='🟢';}
 
   document.getElementById('stats-row').innerHTML=`
     <div class="stat-pill"><div class="stat-icon">🏕️</div><div><div class="stat-num">${v.length}</div><div class="stat-lbl">Cabanas</div></div></div>
@@ -1720,13 +1882,20 @@ function renderTicketPriceGrid(){
 }
 
 function renderManagerSettingsUI(){
+  const tgEl=document.getElementById('thresh-green');
   const t1El=document.getElementById('thresh-first');
   const t2El=document.getElementById('thresh-second');
   const ssEl=document.getElementById('setting-show-srv-stats');
+  if(tgEl) tgEl.value=managerSettings.peakThresholds.green||50;
   if(t1El) t1El.value=managerSettings.peakThresholds.first;
   if(t2El) t2El.value=managerSettings.peakThresholds.second;
   if(ssEl) ssEl.checked=!!managerSettings.showServerStats;
   renderTicketPriceGrid();
+  // Sync 607 toggle UI
+  const chk607=document.getElementById('setting-607-on');
+  if(chk607) chk607.checked=!!alert607.on;
+  const loc607=document.getElementById('setting-607-location');
+  if(loc607) loc607.value=alert607.location||'Kids Cove';
 }
 
 function toggleMgrSettings(){
@@ -2107,9 +2276,8 @@ function renderTV(cabs){
   });
   document.getElementById('last-updated').textContent='Last updated: '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   if(weatherData){const b=document.getElementById('tv-weather-bar');if(b&&!b.innerHTML) b.innerHTML=`<span>${weatherData}</span><span style="opacity:.5">Draper, UT</span>`;}
-  // Help banner
-  const helpBanner=document.getElementById('tv-help-banner');
-  if(helpBanner) helpBanner.classList.toggle('active',helpNeeded);
+  // Help banners (per item)
+  updateHelpUI();
   // Hourly weather
   if(hourlyWeatherData.length) renderHourlyWeather();
 }
@@ -2304,8 +2472,9 @@ function markLateArrived(i){
 // ═══════════════════════════════════════
 // HELP NEEDED / ORDERS TOGGLES
 // ═══════════════════════════════════════
-function toggleKitchenHelp(){
-  helpNeeded=!helpNeeded;
+function toggleHelpItem(key){
+  helpItems[key]=!helpItems[key];
+  helpNeeded=Object.values(helpItems).some(Boolean);
   saveSharedState();
   updateHelpUI();
 }
@@ -2314,13 +2483,67 @@ function toggleBreakroomOrders(){
   saveSharedState();
   updateOrdersUI();
 }
+function toggle607(){
+  const chk=document.getElementById('setting-607-on');
+  alert607.on=chk?chk.checked:!alert607.on;
+  saveSharedState();
+  updateHelpUI();
+}
+function set607Location(loc){
+  alert607.location=loc;
+  saveSharedState();
+  updateHelpUI();
+}
 function updateHelpUI(){
-  const kBtn=document.getElementById('k-help-btn');
-  if(kBtn){kBtn.className=`k-help-btn ${helpNeeded?'on':'off'}`;kBtn.textContent=helpNeeded?'🚨 Help Active':'🚨 Help Needed';}
-  const tvBanner=document.getElementById('tv-help-banner');
-  if(tvBanner) tvBanner.classList.toggle('active',helpNeeded);
-  const brFlash=document.getElementById('br-help-flash');
-  if(brFlash) brFlash.classList.toggle('active',helpNeeded);
+  // Kitchen board: update each help item button
+  const helpKeys=['pitchers','pizzaTrays','expediting','generalHelp','dishes'];
+  helpKeys.forEach(key=>{
+    const btn=document.getElementById(`k-help-${key}`);
+    if(btn) btn.className=`k-help-item-btn ${helpItems[key]?'on':'off'}`;
+  });
+
+  // TV: toggle each banner
+  helpKeys.forEach(key=>{
+    const el=document.getElementById(`tv-help-${key}`);
+    if(el) el.classList.toggle('active',!!helpItems[key]);
+  });
+  const tv607=document.getElementById('tv-help-607');
+  if(tv607){
+    tv607.classList.toggle('active',!!alert607.on);
+    const tv607text=document.getElementById('tv-607-text');
+    const tv607sub=document.getElementById('tv-607-sub');
+    if(tv607text) tv607text.textContent=`💩 607 ALERT — ${alert607.location} 💩`;
+    if(tv607sub) tv607sub.textContent=`Notify maintenance: ${alert607.location}`;
+  }
+
+  // Break room: toggle each alert
+  helpKeys.forEach(key=>{
+    const el=document.getElementById(`br-alert-${key}`);
+    if(el) el.classList.toggle('active',!!helpItems[key]);
+  });
+  const br607=document.getElementById('br-alert-607');
+  if(br607){
+    br607.classList.toggle('active',!!alert607.on);
+    const br607text=document.getElementById('br-alert-607-text');
+    const br607sub=document.getElementById('br-alert-607-sub');
+    if(br607text) br607text.textContent=`💩 607 ALERT — ${alert607.location} 💩`;
+    if(br607sub) br607sub.textContent=`Notify maintenance: ${alert607.location}`;
+  }
+
+  // Manager alerts panel
+  const mgPanel=document.getElementById('mgr-alerts-panel');
+  const mgChips=document.getElementById('mgr-alert-chips');
+  const helpLabels={pitchers:'🫙 Pitchers Needed',pizzaTrays:'🍕 Pizza Trays Needed',expediting:'🚀 Expediting Help',generalHelp:'🙋 General Help',dishes:'🍽 Dishes Needed'};
+  const activeHelp=helpKeys.filter(k=>helpItems[k]).map(k=>`<span class="mgr-alert-chip mgr-alert-chip-help">${helpLabels[k]}</span>`);
+  if(alert607.on) activeHelp.push(`<span class="mgr-alert-chip mgr-alert-chip-607">💩 607 — ${alert607.location}</span>`);
+  if(mgPanel) mgPanel.classList.toggle('has-alerts',activeHelp.length>0);
+  if(mgChips) mgChips.innerHTML=activeHelp.join('');
+
+  // Sync 607 toggle UI in manager settings
+  const chk607=document.getElementById('setting-607-on');
+  if(chk607) chk607.checked=!!alert607.on;
+  const loc607=document.getElementById('setting-607-location');
+  if(loc607) loc607.value=alert607.location||'Kids Cove';
 }
 function updateOrdersUI(){
   const kBtn=document.getElementById('k-orders-btn');
