@@ -459,9 +459,32 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
   .section{break-inside:avoid;}
   #manager-view{display:block!important;padding:0!important;}
 }
+
+/* ═══════════════════════ PASSWORD OVERLAY ═══════════════════════ */
+#pw-overlay{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#012233 0%,#0077b6 65%,#48cae4 100%);display:flex;align-items:center;justify-content:center;}
+#pw-overlay.hidden{display:none;}
+#pw-box{background:var(--card-bg,#fff);border-radius:18px;padding:36px 32px 28px;width:min(340px,90vw);text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.35);}
+#pw-box h2{font-family:'Boogaloo',cursive;font-size:1.8rem;color:var(--ocean,#0077b6);margin-bottom:4px;}
+#pw-box p{font-size:.85rem;color:var(--sub,#889);margin-bottom:20px;}
+#pw-input{width:100%;padding:10px 14px;border:2px solid var(--border,#cde);border-radius:10px;font-family:'Nunito',sans-serif;font-size:1rem;background:var(--input-bg,#f6fbfe);color:var(--text,#023047);outline:none;margin-bottom:12px;transition:border-color .15s;}
+#pw-input:focus{border-color:var(--ocean,#0077b6);}
+#pw-submit{width:100%;padding:10px;border:none;border-radius:10px;background:var(--ocean,#0077b6);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:background .15s;}
+#pw-submit:hover{background:#005f8e;}
+#pw-error{color:var(--coral,#ef476f);font-size:.8rem;margin-top:8px;min-height:1.1em;}
 </style>
 </head>
 <body>
+
+<!-- ═══════════════ PASSWORD OVERLAY ═══════════════ -->
+<div id="pw-overlay">
+  <div id="pw-box">
+    <h2>🌊 CowaBunga Bay</h2>
+    <p>Enter the staff password to access the management interface.</p>
+    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password">
+    <button id="pw-submit" onclick="checkPassword()">Unlock →</button>
+    <div id="pw-error"></div>
+  </div>
+</div>
 
 <!-- ═══════════════ TOPBAR ═══════════════ -->
 <div class="topbar">
@@ -746,6 +769,31 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 </div>
 
 <script>
+// ═══════════════════════════════════════
+// PASSWORD PROTECTION
+// ═══════════════════════════════════════
+const PW_CORRECT='Davehuishishot!';
+(function(){
+  const overlay=document.getElementById('pw-overlay');
+  const input=document.getElementById('pw-input');
+  if(sessionStorage.getItem('cb_auth')==='1'){overlay.classList.add('hidden');return;}
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')checkPassword();});
+  setTimeout(function(){input.focus();},50);
+})();
+function checkPassword(){
+  const input=document.getElementById('pw-input');
+  const error=document.getElementById('pw-error');
+  if(input.value===PW_CORRECT){
+    sessionStorage.setItem('cb_auth','1');
+    document.getElementById('pw-overlay').classList.add('hidden');
+    error.textContent='';
+  }else{
+    error.textContent='Incorrect password. Please try again.';
+    input.value='';
+    input.focus();
+  }
+}
+
 // ═══════════════════════════════════════
 // CONSTANTS
 // ═══════════════════════════════════════
