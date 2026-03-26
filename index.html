@@ -637,7 +637,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
     </div>
   </div>
 
-  <div class="field"><label>Group Name</label><input type="text" id="f-group" placeholder="e.g. Smith Family"></div>
+  <div class="field"><label>Group Name</label><input type="text" id="f-group" placeholder="e.g. Smith Family" oninput="modalAutoSave()"></div>
   <div class="field"><label>Headcount</label><select id="f-count"></select></div>
   <div class="field"><label>Assigned Server</label><select id="f-server"></select></div>
   <div class="field"><label>Event Type</label>
@@ -661,7 +661,7 @@ body{font-family:'Nunito',sans-serif;background:var(--page-bg);color:var(--text)
 
   <div class="field">
     <label>📝 Manager Notes</label>
-    <textarea id="f-notes" rows="2" placeholder="Internal notes — manager view only…" style="background:#fffbf0;border-color:#f0d060;resize:vertical;"></textarea>
+    <textarea id="f-notes" rows="2" placeholder="Internal notes — manager view only…" style="background:#fffbf0;border-color:#f0d060;resize:vertical;" oninput="modalAutoSave()"></textarea>
   </div>
 
   <!-- Photo attachment -->
@@ -794,6 +794,11 @@ function loadCustomLabels(){try{const r=ls('cb_labels');return r?JSON.parse(r):{
 function saveCustomLabels(){lss('cb_labels',JSON.stringify(customLabels));}
 
 // ═══════════════════════════════════════
+// DEBOUNCE UTILITY
+// ═══════════════════════════════════════
+function debounce(fn,delay){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),delay);};}
+
+// ═══════════════════════════════════════
 // SUPABASE REAL-TIME SYNC
 // ═══════════════════════════════════════
 const SB_URL='https://vxbzslecnpxoevdthtyb.supabase.co';
@@ -871,6 +876,10 @@ async function sbSyncShiftNotes(date,sess,notes){
     setSyncChip('online');
   }catch(e){console.warn('sbSyncShiftNotes:',e);}
 }
+
+// Debounced sync — waits 1 second after the last call before hitting Supabase
+const sbSyncSessionDebounced=debounce(sbSyncSession,1000);
+const sbSyncShiftNotesDebounced=debounce(sbSyncShiftNotes,1000);
 
 async function sbDrainQueue(){
   if(!sb||!sbOnline||!sbQueue.length) return;
@@ -1056,7 +1065,7 @@ function doSearch(q){
 function saveShiftNotes(){
   const v=document.getElementById('shift-notes').value;
   lss(`cb_shiftnotes_${currentDate}_${currentSession}`,v);
-  sbSyncShiftNotes(currentDate,currentSession,v);
+  sbSyncShiftNotesDebounced(currentDate,currentSession,v);
 }
 function loadShiftNotes(){
   const el=document.getElementById('shift-notes');
@@ -1585,6 +1594,19 @@ function updateAllergyUI(){document.getElementById('allergy-picker').style.displ
 function setModalStatus(v){modalStatus=v;updateModalUI();}
 function updateModalUI(){['available','reserved','checkedin','paid'].forEach(v=>document.getElementById(`stog-${v}`).classList.toggle('sel',v===modalStatus));}
 function closeModal(){document.getElementById('overlay').classList.remove('open');modalId=null;}
+
+function modalAutoSave(){
+  if(!modalId) return;
+  const grpEl=document.getElementById('f-group');
+  const notesEl=document.getElementById('f-notes');
+  if(!grpEl||!notesEl) return;
+  const s=loadSession();
+  if(!s[modalId]) s[modalId]={};
+  s[modalId].group=grpEl.value.trim();
+  s[modalId].notes=notesEl.value.trim();
+  lss(stateKey(),JSON.stringify(s));
+  sbSyncSessionDebounced(s);
+}
 
 function saveModal(){
   if(!modalId) return;
