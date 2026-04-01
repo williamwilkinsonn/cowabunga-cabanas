@@ -2434,6 +2434,7 @@ function buildWBBadgeHtmlKitchen(c){
     :`${wb.label} Wristband`;
   return `<div class="k-row"><span class="k-badge k-badge-wb"><span class="wb-dot-k" style="${dotStyle}"></span> 🪬 ${lbl}</span></div>`;
 }
+function setModalStatus(val){modalStatus=val;updateModalUI();}
 function updateModalUI(){['available','reserved','checkedin','paid'].forEach(v=>document.getElementById(`stog-${v}`).classList.toggle('sel',v===modalStatus));}
 function closeModal(){document.getElementById('overlay').classList.remove('open');modalId=null;}
 
